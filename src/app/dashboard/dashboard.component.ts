@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
+import {InfoCardComponent} from "./infocard/info-card.component";
 
 @Component({
   selector: 'app-dashboard',
