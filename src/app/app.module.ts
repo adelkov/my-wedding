@@ -9,7 +9,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
-import { GuestListComponent } from './dashboard/guest-list/guest-list.component';
+import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { GuestListComponent } from './dashboard/guest-list/guest-list.component'
     HomeComponent,
     NavigationComponent,
     DashboardComponent,
-    GuestListComponent,
+    InfoCardComponent
   ],
   imports: [
     BrowserModule,
