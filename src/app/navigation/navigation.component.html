@@ -8,9 +8,9 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="/wedding/belajozsi">Béla Józsi</a>
+      <a mat-list-item routerLink="/wedding/444">444</a>
+      <a mat-list-item routerLink="/wedding/111">111</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,8 +23,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>my-wedding</span>
+      <span>Display wedding: {{id}}</span>
     </mat-toolbar>
-    <app-dashboard></app-dashboard>
+    <app-dashboard
+      [weddingName] = id
+    ></app-dashboard>
   </mat-sidenav-content>
 </mat-sidenav-container>

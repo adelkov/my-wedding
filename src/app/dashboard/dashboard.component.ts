@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
 import {InfoCardComponent} from "./infocard/info-card.component";
@@ -8,7 +8,8 @@ import {InfoCardComponent} from "./infocard/info-card.component";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+  @Input() weddingName: String;
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -20,7 +21,6 @@ export class DashboardComponent {
           { title: 'Card 4', cols: 1, rows: 1 }
         ];
       }
-
       return [
         { title: 'Card 1', cols: 2, rows: 1 },
         { title: 'Card 2', cols: 1, rows: 1 },
@@ -31,4 +31,8 @@ export class DashboardComponent {
   );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+
+  ngOnInit() {
+    // ToDo: getting wedding details via wedding-name AJAX
+  }
 }
