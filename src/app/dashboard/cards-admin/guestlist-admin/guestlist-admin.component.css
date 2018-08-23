@@ -1,0 +1,29 @@
+table, mat-paginator, mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 6%;
+}
+
+.mat-row:hover {
+  opacity: 0.1;
+}
+
+/*mat-grid-list {*/
+  /*height: 300px;*/
+/*}*/
+
+/*.mat-elevation-z8 {*/
+  /*width: 100%;*/
+/*}*/
+
+
+map-card.mat-card {
+  padding: 0px;
+}

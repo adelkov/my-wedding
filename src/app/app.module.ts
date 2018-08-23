@@ -6,10 +6,26 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatFormFieldModule, MatInputModule,
+} from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
+import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
+import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
+import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +33,9 @@ import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
     HomeComponent,
     NavigationComponent,
     DashboardComponent,
-    InfoCardComponent
+    InfoCardComponent,
+    GuestlistAdminComponent,
+    GuestDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +52,13 @@ import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    GuestlistService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
