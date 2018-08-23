@@ -30,6 +30,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(
       (params) => {
         this.id = params['id']; // + sign could cast to number
+
       }
     )
   }
