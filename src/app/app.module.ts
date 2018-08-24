@@ -8,13 +8,29 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatFormFieldModule, MatInputModule,
+} from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
 import { PresentListGuestComponent } from './dashboard/presentlist-guest/present-list-guest.component';
 import {HttpModule} from "@angular/http";
 import {HttpClientModule} from "@angular/common/http";
+import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
+import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
+import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
 
 @NgModule({
   declarations: [
@@ -24,6 +40,9 @@ import {HttpClientModule} from "@angular/common/http";
     DashboardComponent,
     InfoCardComponent,
     PresentListGuestComponent
+    InfoCardComponent,
+    GuestlistAdminComponent,
+    GuestDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +63,13 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    GuestlistService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,27 @@
+<mat-card *ngIf="!showMe">
+  Choose a guest to see details and possible action
+</mat-card>
+<mat-card class="example-card" *ngIf="showMe">
+  <mat-card-header>
+    <img mat-card-avatar src="{{currentGuest.imgURL}}" alt="{{currentGuest.name}}'s avatar image">
+    <mat-card-title>{{ currentGuest.name }}</mat-card-title>
+    <mat-card-subtitle>Guests invited: {{ currentGuest.guests }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Details can come here
+    </p>
+    <hr>
+    and here... <br>
+    and here... <br>
+    and here...
+    <hr>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="accent">Edit</button>
+    <button mat-stroked-button color="accent">Uninvite</button>
+    <button mat-stroked-button color="accent">Go to Facebook profile</button>
+    <button mat-stroked-button color="accent">Send e-mail</button>
+    <button mat-stroked-button color="accent">Presents</button>
+  </mat-card-actions>
+</mat-card>
