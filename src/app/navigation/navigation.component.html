@@ -6,11 +6,23 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary">{{ userID }}</mat-toolbar>
+
+    <app-user-card></app-user-card>
+    <h2>My wedding:</h2>
     <mat-nav-list>
-      <a mat-list-item routerLink="/wedding/belajozsi">Béla Józsi</a>
-      <a mat-list-item routerLink="/wedding/444">444</a>
-      <a mat-list-item routerLink="/wedding/111">111</a>
+      <a *ngFor="let wedding of weddings" mat-list-item routerLink="/wedding/{{wedding.name}}">
+        {{ wedding.name }}
+      </a>
+    </mat-nav-list>
+    <h2>Guest weddings</h2>
+    <mat-nav-list>
+      <div *ngFor="let wedding of weddings">
+        <a mat-list-item routerLink="/wedding/{{wedding.name}}">
+          {{ wedding.name }}
+        </a>
+        <br>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -26,7 +38,7 @@
       <span>Display wedding: {{id}}</span>
     </mat-toolbar>
     <app-dashboard
-      [weddingName] = id
+      [weddingName]=id
     ></app-dashboard>
   </mat-sidenav-content>
 </mat-sidenav-container>
