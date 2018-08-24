@@ -26,6 +26,8 @@ import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
 import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
 import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
 import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
+import {WeddingService} from "./navigation/wedding.service";
+import { UserCardComponent } from './navigation/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlis
     DashboardComponent,
     InfoCardComponent,
     GuestlistAdminComponent,
-    GuestDetailComponent
+    GuestDetailComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlis
     MatInputModule
   ],
   providers: [
-    GuestlistService
+    GuestlistService,
+    WeddingService
   ],
   bootstrap: [AppComponent]
 })
