@@ -12,7 +12,7 @@ export class PresentListGuestComponent implements OnInit, OnDestroy{
   presentList: Present[] = [];
 
   private presentListSub: Subscription;
-  constructor(public presentListGuestService: PresentListGuestService) {}
+  constructor(private presentListGuestService: PresentListGuestService) {}
 
   ngOnInit(): void {
     this.presentListGuestService.getPresentList();
@@ -20,7 +20,6 @@ export class PresentListGuestComponent implements OnInit, OnDestroy{
       .subscribe((presents: Present[]) => {
         this.presentList = presents;
       });
-    //this.presentList = this.presentListGuestService.getPresentList();
   }
 
   ngOnDestroy(): void {

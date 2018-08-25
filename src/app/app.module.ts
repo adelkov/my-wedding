@@ -26,11 +26,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
 import { PresentListGuestComponent } from './dashboard/presentlist-guest/present-list-guest.component';
-import {HttpModule} from "@angular/http";
 import {HttpClientModule} from "@angular/common/http";
 import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
 import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
 import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
+import {PresentListGuestService} from "./dashboard/presentlist-guest/present-list-guest.service";
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlis
     NavigationComponent,
     DashboardComponent,
     InfoCardComponent,
-    PresentListGuestComponent
+    PresentListGuestComponent,
     InfoCardComponent,
     GuestlistAdminComponent,
     GuestDetailComponent
@@ -62,13 +62,14 @@ import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlis
     MatSortModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
     MatSortModule,
     MatFormFieldModule,
     MatInputModule
   ],
   providers: [
-    GuestlistService
+    GuestlistService,
+    PresentListGuestService
   ],
   bootstrap: [AppComponent]
 })
