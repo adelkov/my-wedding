@@ -30,6 +30,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
 import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
 import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
+import {WeddingService} from "./navigation/wedding.service";
+import { UserCardComponent } from './navigation/user-card/user-card.component';
 import {PresentListGuestService} from "./dashboard/presentlist-guest/present-list-guest.service";
 
 @NgModule({
@@ -42,7 +44,8 @@ import {PresentListGuestService} from "./dashboard/presentlist-guest/present-lis
     PresentListGuestComponent,
     InfoCardComponent,
     GuestlistAdminComponent,
-    GuestDetailComponent
+    GuestDetailComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import {PresentListGuestService} from "./dashboard/presentlist-guest/present-lis
   ],
   providers: [
     GuestlistService,
+    WeddingService,
     PresentListGuestService
   ],
   bootstrap: [AppComponent]
