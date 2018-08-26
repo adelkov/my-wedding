@@ -1,0 +1,5 @@
+<mat-selection-list #list (selectionChange)="onSelection($event, list.selectedOptions)">
+  <mat-list-option *ngFor="let present of presentList" [selected]="present.isTaken" [value]="present" [disabled]="present.isTaken">
+    {{ present.name }}
+  </mat-list-option>
+</mat-selection-list>
