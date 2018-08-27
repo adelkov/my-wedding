@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
+
 import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -36,9 +38,11 @@ import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlis
 import {WeddingService} from "./navigation/wedding.service";
 import { UserCardComponent } from './navigation/user-card/user-card.component';
 import {PresentListGuestService} from "./dashboard/presentlist-guest/present-list-guest.service";
+
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { MapAdminComponent } from './dashboard/cards-admin/map-admin/map-admin.component';
 import { AgmDirectionModule } from 'agm-direction';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +52,7 @@ import { AgmDirectionModule } from 'agm-direction';
     DashboardComponent,
     InfoCardComponent,
     PresentListGuestComponent,
+    InfoCardComponent,
     GuestlistAdminComponent,
     GuestDetailComponent,
     UserCardComponent,
@@ -86,7 +91,6 @@ import { AgmDirectionModule } from 'agm-direction';
     GuestlistService,
     WeddingService,
     PresentListGuestService
-    WeddingService,
     GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
