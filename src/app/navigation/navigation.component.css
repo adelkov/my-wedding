@@ -10,3 +10,16 @@
   position: sticky;
   top: 0;
 }
+
+a {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.mat-button-riple {
+  margin-bottom: 10px;
+}
+
+#navToggle {
+  position: fixed;
+}

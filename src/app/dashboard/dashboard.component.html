@@ -1,14 +1,25 @@
 <div class="grid-container">
   <mat-card>
-    <h1>Guestlist</h1>
-
-    <mat-grid-list cols="2">
-      <mat-grid-tile>
+    <div class="container"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutWrap
+         fxLayoutGap="0.5%"
+         fxLayoutAlign="center">
+      <div fxFlex="50%">
         <app-guestlist-admin></app-guestlist-admin>
-      </mat-grid-tile>
-      <mat-grid-tile>
+      </div>
+      <div fxFlex="50%">
         <app-guest-detail></app-guest-detail>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card>
+    <app-map-admin></app-map-admin>
+  </mat-card>
+  <mat-card>
+    Insert component here
+  </mat-card>
+  <mat-card>
   </mat-card>
 </div>

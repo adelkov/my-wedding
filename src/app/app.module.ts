@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 
+import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
+
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +23,9 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatFormFieldModule, MatInputModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonToggleModule,
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -34,6 +39,11 @@ import {WeddingService} from "./navigation/wedding.service";
 import { UserCardComponent } from './navigation/user-card/user-card.component';
 import {PresentListGuestService} from "./dashboard/presentlist-guest/present-list-guest.service";
 
+import {FlexLayoutModule} from "@angular/flex-layout";
+import { MapAdminComponent } from './dashboard/cards-admin/map-admin/map-admin.component';
+import { AgmDirectionModule } from 'agm-direction';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +55,8 @@ import {PresentListGuestService} from "./dashboard/presentlist-guest/present-lis
     InfoCardComponent,
     GuestlistAdminComponent,
     GuestDetailComponent,
-    UserCardComponent
+    UserCardComponent,
+    MapAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +70,7 @@ import {PresentListGuestService} from "./dashboard/presentlist-guest/present-lis
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    MatButtonToggleModule,
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
@@ -68,12 +80,18 @@ import {PresentListGuestService} from "./dashboard/presentlist-guest/present-lis
     HttpClientModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FlexLayoutModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA'
+      }),
+    AgmDirectionModule
   ],
   providers: [
     GuestlistService,
     WeddingService,
     PresentListGuestService
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })

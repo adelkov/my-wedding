@@ -17,7 +17,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   id: String;
   userID = 102030; // todo get from Auth0
   sub: Subscription;
-  weddings: Wedding[];
+  myWeddings: Wedding[];
+  guestWeddings: Wedding[];
+  menuOpen = false;
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -37,13 +39,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
       (params) => {
         this.id = params['id']; // + sign could cast to number
       }
-    )
+    );
 
-    this.weddings = this.weddingService.getWUserWithUserID('random_user_ID');
+    this.myWeddings = this.weddingService.getWUserWithUserID('random_user_ID').myWeedings;
+    this.guestWeddings = this.weddingService.getWUserWithUserID('random_user_ID').guestWeddings;
 
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  toggleMenuIcon() {
+    this.menuOpen = !this.menuOpen;
   }
 }

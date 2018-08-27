@@ -1,0 +1,49 @@
+
+<h1>Event locations</h1>
+<mat-button-toggle-group
+  name="fontStyle"
+  aria-label="Font Style"
+  (click)="onSelection(group.value)"
+  #group="matButtonToggleGroup"
+>
+  <mat-button-toggle
+    aria-selected="true"
+    *ngFor="let location of weddingLocations"
+    value="{{location}}"
+  >{{location}}</mat-button-toggle>
+</mat-button-toggle-group>
+<div class="example-container" *ngIf="newLocationIsInEditing">
+  <mat-form-field>
+    <input matInput placeholder="Location name" #newLocationToAdd>
+  </mat-form-field>
+  <button mat-mini-fab color="primary" (click)="addNewLocation(newLocationToAdd.value)">+</button>
+
+
+</div>
+<button *ngIf="!newLocationIsInEditing" mat-mini-fab color="primary" (click)="newLocationIsInEditing = true">+</button>
+<!--<agm-map [latitude]="lat" [longitude]="lng">-->
+  <!--<agm-direction [origin]="origin" [destination]="destination">-->
+  <!--</agm-direction>-->
+<!--</agm-map>-->
+<agm-map
+  [latitude]="initialCoordinates.latitude"
+  [longitude]="initialCoordinates.longitude"
+  (mapClick)="onSelection($event, group.value)"
+>
+  <!--<agm-direction-->
+    <!--[origin]="{lat: 47.497912, lng: 19.040235}"-->
+    <!--[destination]="{lat: 47.497911, lng: 19.00000}"-->
+  <!--&gt;</agm-direction>-->
+  <agm-marker
+    *ngFor="let location of weddingLocations"
+    [latitude]="weddingLocationsCoordinates[location].latitude"
+    [longitude]="weddingLocationsCoordinates[location].longitude"
+    label={{location}}
+    draggable="true"
+  >
+    <agm-info-window>
+      <button mat-stroked-button color="warn" (click)="deleteLocation(location)">Delete this location</button>
+      <button mat-stroked-button color="primary" (click)="renameLocation(location)">Rename this location</button>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
