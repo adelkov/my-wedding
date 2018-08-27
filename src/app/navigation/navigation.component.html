@@ -7,18 +7,24 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">{{ userID }}</mat-toolbar>
-
     <app-user-card></app-user-card>
-    <h2>My wedding:</h2>
+    <h2>My weddings:</h2>
     <mat-nav-list>
-      <a *ngFor="let wedding of weddings" mat-list-item routerLink="/wedding/{{wedding.name}}">
+      <a mat-stroked-button color="primary"
+         *ngFor="let wedding of myWeddings"
+         routerLink="/wedding/{{wedding.name}}">
         {{ wedding.name }}
       </a>
+      <a mat-stroked-button color="alert">
+        +
+      </a>
+
     </mat-nav-list>
-    <h2>Guest weddings</h2>
+    <h2>Guest weddings:</h2>
     <mat-nav-list>
-      <div *ngFor="let wedding of weddings">
-        <a mat-list-item routerLink="/wedding/{{wedding.name}}">
+      <div *ngFor="let wedding of guestWeddings">
+        <a mat-stroked-button color="warn"
+           routerLink="/wedding/{{wedding.name}}">
           {{ wedding.name }}
         </a>
         <br>
@@ -26,17 +32,22 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Display wedding: {{id}}</span>
-    </mat-toolbar>
+    <button
+      id="navToggle"
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle(); toggleMenuIcon()"
+    >
+      <mat-icon aria-label="Side nav toggle icon">
+        <i class="material-icons" *ngIf="!menuOpen">
+          arrow_back_ios
+        </i>
+        <i class="material-icons" *ngIf="menuOpen">
+          menu
+        </i>
+      </mat-icon>
+    </button>
     <app-dashboard
       [weddingName]=id
     ></app-dashboard>

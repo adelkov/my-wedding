@@ -1,26 +1,41 @@
 .grid-container {
-  margin: 10px;
+  margin: 12px;
+  padding: 0;
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+mat-card {
+  margin: 24px;
 }
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+.mat-grid-tile {
+  background-color: green;
+  padding: 0%;
+  height: 10px;
 }
 
-.dashboard-card-content {
-  text-align: center;
+app-guestlist-admin {
+  margin: 0;
 }
 
-
-map-card.mat-card:host {
-  padding: 0px;
+mat-grid-list {
+  height: 100%;
 }
+
+#map {
+  height: 400px;
+}
+/*.dashboard-card {*/
+  /*position: absolute;*/
+  /*top: 15px;*/
+  /*left: 15px;*/
+  /*right: 15px;*/
+  /*bottom: 15px;*/
+/*}*/
+
+/*.more-button {*/
+  /*position: absolute;*/
+  /*top: 5px;*/
+  /*right: 10px;*/
+/*}*/
+
+

@@ -1,3 +1,5 @@
+
+<h1>Guestlist</h1>
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Find guest">
 </mat-form-field>
@@ -32,4 +34,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClickRow(row)">
   </tr>
 </table>
-<mat-paginator [pageSizeOptions]="[6, 25, 100]"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 40]"></mat-paginator>

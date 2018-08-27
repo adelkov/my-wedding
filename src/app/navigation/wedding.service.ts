@@ -4,20 +4,26 @@ import {Wedding} from "./wedding.model";
 @Injectable()
 export class WeddingService {
 
-  private weddings = [
+  private myWeddings = [
     new Wedding('jozsibela2018', 'január 2.', 'admin', [], []),
+  ];
+
+  private guestWeddings = [
     new Wedding('julizoliLOVE', 'január 2.', 'guest', [], []),
-    new Wedding('dsfasdf', 'január 2.', 'guest', [], []),
-    new Wedding('fsda', 'január 2.', 'guest', [], []),
-    new Wedding('fdsafs', 'február 2.', 'guest', [], []),
-    new Wedding('sdfsad', 'január 23.', 'guest', [], [])
+    new Wedding('Love forest 2017', 'január 2.', 'guest', [], []),
+    new Wedding('Nyuszi és Husi', 'január 2.', 'guest', [], []),
+    new Wedding('Wedding by the lake', 'február 2.', 'guest', [], []),
+    new Wedding('Timi & Zoli', 'január 23.', 'guest', [], [])
   ]
 
   constructor() {
   }
 
   getWUserWithUserID(userID: string) {
-    return this.weddings;
+    return {
+      myWeedings: this.myWeddings,
+      guestWeddings: this.guestWeddings
+    }
   }
 
   addNewWedding(userID: string, wedding: Wedding) {

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -18,7 +19,9 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatFormFieldModule, MatInputModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonToggleModule,
 } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -28,6 +31,9 @@ import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/gu
 import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
 import {WeddingService} from "./navigation/wedding.service";
 import { UserCardComponent } from './navigation/user-card/user-card.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
+import { MapAdminComponent } from './dashboard/cards-admin/map-admin/map-admin.component';
+import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,8 @@ import { UserCardComponent } from './navigation/user-card/user-card.component';
     InfoCardComponent,
     GuestlistAdminComponent,
     GuestDetailComponent,
-    UserCardComponent
+    UserCardComponent,
+    MapAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,16 +59,23 @@ import { UserCardComponent } from './navigation/user-card/user-card.component';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    MatButtonToggleModule,
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FlexLayoutModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA'
+      }),
+    AgmDirectionModule
   ],
   providers: [
     GuestlistService,
-    WeddingService
+    WeddingService,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })

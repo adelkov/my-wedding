@@ -15,6 +15,4 @@ export class InfoCardComponent implements OnInit{
   ngOnInit() {
     this.weddingDescription = this.infoCardService.getInfoCardData().description;
   }
-
-
 }
