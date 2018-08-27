@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
 
 import { AppComponent } from './app.component';
@@ -26,11 +28,14 @@ import {
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
+import { PresentListGuestComponent } from './dashboard/presentlist-guest/present-list-guest.component';
+import {HttpClientModule} from "@angular/common/http";
 import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
 import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
 import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
 import {WeddingService} from "./navigation/wedding.service";
 import { UserCardComponent } from './navigation/user-card/user-card.component';
+import {PresentListGuestService} from "./dashboard/presentlist-guest/present-list-guest.service";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { MapAdminComponent } from './dashboard/cards-admin/map-admin/map-admin.component';
 import { AgmDirectionModule } from 'agm-direction';
@@ -42,6 +47,7 @@ import { AgmDirectionModule } from 'agm-direction';
     NavigationComponent,
     DashboardComponent,
     InfoCardComponent,
+    PresentListGuestComponent,
     GuestlistAdminComponent,
     GuestDetailComponent,
     UserCardComponent,
@@ -64,6 +70,10 @@ import { AgmDirectionModule } from 'agm-direction';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatSortModule,
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
@@ -74,6 +84,8 @@ import { AgmDirectionModule } from 'agm-direction';
   ],
   providers: [
     GuestlistService,
+    WeddingService,
+    PresentListGuestService
     WeddingService,
     GoogleMapsAPIWrapper
   ],
