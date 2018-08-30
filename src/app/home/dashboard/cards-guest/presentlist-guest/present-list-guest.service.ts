@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {Present} from "../../models/present.model";
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs/Subject";
+import {Present} from "./present.model";
 
-@Injectable({ providedIn: "root" })
+@Injectable()
 export class PresentListGuestService {
 
   private presentList: Present[] = [];

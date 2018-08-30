@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {PresentListGuestService} from "./present-list-guest.service";
-import {Present} from "../../models/present.model";
 import {Subscription} from "rxjs/Subscription";
+import {Present} from "./present.model";
 
 @Component({
   selector: 'app-present-guest',
@@ -12,7 +12,9 @@ export class PresentListGuestComponent implements OnInit, OnDestroy{
   presentList: Present[] = [];
 
   private presentListSub: Subscription;
-  constructor(private presentListGuestService: PresentListGuestService) {}
+  constructor(
+    private presentListGuestService: PresentListGuestService
+  ) {}
 
   ngOnInit(): void {
     this.presentListGuestService.getPresentList();

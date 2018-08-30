@@ -1,0 +1,50 @@
+<h1>Event locations</h1>
+<div class="container"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutWrap
+     fxLayoutGap="0.5%"
+     fxLayoutAlign="center">
+  <div fxFlex="30%">
+    <mat-card>
+      Click on the map to add new location!
+    </mat-card>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [vertical]="true">
+      <mat-button-toggle
+        *ngFor="let m of markers"
+        value="{{m.label}}"
+        (click)="onLocationClick(m)"
+      >{{m.label}}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div fxFlex="70%">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [styles]="styles"
+      [disableDefaultUI]="false"
+      [zoomControl]="false"
+      (mapClick)="mapClicked($event)">
+
+      <agm-marker
+        *ngFor="let m of markers; let i = index"
+        (mouseOver)="infoWindow.open()"
+        (markerClick)="clickedMarker(m.label, i)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [label]="m.label"
+        [markerDraggable]="m.draggable"
+        (dragEnd)="markerDragEnd(m, $event)">
+        <agm-info-window #infoWindow>
+          <h2>{{m.label}}</h2>
+          <app-marker-info
+            isOpen="true"
+            [marker]="m"
+          ></app-marker-info>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+</div>

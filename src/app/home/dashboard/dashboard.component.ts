@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
-import {InfoCardComponent} from "./infocard/info-card.component";
+import { BreakpointObserver } from '@angular/cdk/layout';
+import {Wedding} from "../wedding.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +8,6 @@ import {InfoCardComponent} from "./infocard/info-card.component";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit{
-  @Input() weddingName: String;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

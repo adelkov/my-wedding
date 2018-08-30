@@ -6,7 +6,7 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">{{ userID }}</mat-toolbar>
+    <mat-toolbar color="primary">Company logo</mat-toolbar>
     <app-user-card></app-user-card>
     <h2>My weddings:</h2>
     <mat-nav-list>
@@ -15,16 +15,18 @@
          routerLink="/wedding/{{wedding.name}}">
         {{ wedding.name }}
       </a>
-      <a mat-stroked-button color="alert">
+      <button mat-stroked-button color="alert" (click)="onAddNewWedding()">
         +
-      </a>
+      </button>
 
     </mat-nav-list>
     <h2>Guest weddings:</h2>
     <mat-nav-list>
       <div *ngFor="let wedding of guestWeddings">
         <a mat-stroked-button color="warn"
-           routerLink="/wedding/{{wedding.name}}">
+           routerLink="/wedding/{{wedding.name}}"
+           (click)="updateDashBoard(wedding)"
+        >
           {{ wedding.name }}
         </a>
         <br>
@@ -48,8 +50,6 @@
         </i>
       </mat-icon>
     </button>
-    <app-dashboard
-      [weddingName]=id
-    ></app-dashboard>
+    <app-dashboard></app-dashboard>
   </mat-sidenav-content>
 </mat-sidenav-container>

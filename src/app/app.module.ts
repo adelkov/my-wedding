@@ -2,14 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-
 import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
-
-
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './landing/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './home/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import {
   MatToolbarModule,
@@ -27,21 +24,21 @@ import {
   MatInputModule,
   MatButtonToggleModule,
 } from '@angular/material';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import {AppRoutingModule} from "./app-routing.module";
-import {InfoCardComponent} from "./dashboard/infocard/info-card.component";
-import { PresentListGuestComponent } from './dashboard/presentlist-guest/present-list-guest.component';
 import {HttpClientModule} from "@angular/common/http";
-import { GuestlistAdminComponent } from './dashboard/cards-admin/guestlist-admin/guestlist-admin.component';
-import { GuestDetailComponent } from './dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component';
-import {GuestlistService} from "./dashboard/cards-admin/guestlist-admin/guestlist.service";
-import {WeddingService} from "./navigation/wedding.service";
-import { UserCardComponent } from './navigation/user-card/user-card.component';
-import {PresentListGuestService} from "./dashboard/presentlist-guest/present-list-guest.service";
+import {WeddingService} from "./home/wedding.service";
+import { UserCardComponent } from './home/user-card/user-card.component';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
-import { MapAdminComponent } from './dashboard/cards-admin/map-admin/map-admin.component';
 import { AgmDirectionModule } from 'agm-direction';
+import {DashboardComponent} from "./home/dashboard/dashboard.component";
+import {GuestlistAdminComponent} from "./home/dashboard/cards-admin/guestlist-admin/guestlist-admin.component";
+import {GuestDetailComponent} from "./home/dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component";
+import {MarkerInfoComponent} from "./home/dashboard/cards-admin/map-admin/marker-info/marker-info.component";
+import {MapAdminComponent} from './home/dashboard/cards-admin/map-admin/map-admin.component';
+import {GuestlistService} from "./home/dashboard/cards-admin/guestlist-admin/guestlist.service";
+import {PresentListGuestService} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.service";
+import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-admin/info-card-admin.component';
 
 
 @NgModule({
@@ -50,13 +47,12 @@ import { AgmDirectionModule } from 'agm-direction';
     HomeComponent,
     NavigationComponent,
     DashboardComponent,
-    InfoCardComponent,
-    PresentListGuestComponent,
-    InfoCardComponent,
     GuestlistAdminComponent,
     GuestDetailComponent,
     UserCardComponent,
     MapAdminComponent,
+    MarkerInfoComponent,
+    InfoCardAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +86,7 @@ import { AgmDirectionModule } from 'agm-direction';
   providers: [
     GuestlistService,
     WeddingService,
-    PresentListGuestService
+    PresentListGuestService,
     GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]

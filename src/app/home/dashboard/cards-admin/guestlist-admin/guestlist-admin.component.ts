@@ -45,5 +45,4 @@ export class GuestlistAdminComponent implements OnInit {
     this.guestService.guestDisplayed = true;
     this.guestService.guestChosen.next(row)
   }
-
 }
