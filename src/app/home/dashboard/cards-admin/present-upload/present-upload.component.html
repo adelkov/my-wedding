@@ -1,0 +1,9 @@
+<form (submit)="onPresentSubmit(presentUploadForm)" #presentUploadForm="ngForm">
+  <mat-form-field>
+    <input matInput name="name" ngModel type="text" placeholder="Present's name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="link" ngModel type="text" placeholder="Link">
+  </mat-form-field>
+  <button mat-raised-button type="submit"> Upload </button>
+</form>
