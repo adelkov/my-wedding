@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Add new wedding!</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" #f="ngForm">
+    <mat-form-field>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        ngModel
+        name="name"
+        required
+        matInput
+        placeholder="Wedding name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        type="text"
+        id="place"
+        class="form-control"
+        ngModel
+        name="place"
+        required
+        matInput
+        placeholder="Location">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="text"
+        id="description"
+        class="form-control"
+        ngModel
+        name="description"
+        required
+        matInput
+        placeholder="Invitation: you can change this later!">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput id="date" name="date" [matDatepicker]="picker" placeholder="Choose a date for your wedding" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!f.valid"
+    >Add wedding</button>
+  </form>
+</mat-dialog-content>

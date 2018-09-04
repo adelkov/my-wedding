@@ -11,37 +11,37 @@
     </mat-card>
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [vertical]="true">
       <mat-button-toggle
-        *ngFor="let m of markers"
-        value="{{m.label}}"
-        (click)="onLocationClick(m)"
-      >{{m.label}}
+        *ngFor="let marker of markers"
+        value="{{marker.label}}"
+        (click)="onLocationClick(marker)"
+      >{{marker.label}}
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <div fxFlex="70%">
     <agm-map
-      [latitude]="lat"
-      [longitude]="lng"
+      [latitude]="latCenterView"
+      [longitude]="lngCenterView"
       [zoom]="zoom"
-      [styles]="styles"
       [disableDefaultUI]="false"
       [zoomControl]="false"
       (mapClick)="mapClicked($event)">
 
       <agm-marker
-        *ngFor="let m of markers; let i = index"
-        (mouseOver)="infoWindow.open()"
-        (markerClick)="clickedMarker(m.label, i)"
-        [latitude]="m.lat"
-        [longitude]="m.lng"
-        [label]="m.label"
-        [markerDraggable]="m.draggable"
-        (dragEnd)="markerDragEnd(m, $event)">
-        <agm-info-window #infoWindow>
-          <h2>{{m.label}}</h2>
+        *ngFor="let marker of markers; let i = index"
+        (markerClick)="clickedMarker(marker.label, i)"
+        [latitude]="marker.lat"
+        [longitude]="marker.lng"
+        [label]="marker.label"
+        [markerDraggable]="marker.draggable"
+        (dragEnd)="markerDragEnd(marker, $event)">
+        <agm-info-window
+          #infoWindow
+          [isOpen]="marker.isOpen"
+        >
+          <h2>{{marker.label}}</h2>
           <app-marker-info
-            isOpen="true"
-            [marker]="m"
+            [marker]="marker"
           ></app-marker-info>
         </agm-info-window>
       </agm-marker>

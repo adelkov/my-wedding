@@ -14,26 +14,28 @@ export class WeddingService {
   constructor(private http: HttpClient) {
   }
 
-
   addNewWedding(email: string, wedding: Wedding) {
     // POST new wedding to server
-    let params = new HttpParams().set("email", email); //Create new HttpParams
+    console.log("start sending POST Request");
+    let params = new HttpParams().set("email", email);
     return this.http.post('http://localhost:8080/newwedding', wedding, {params: params})
       .subscribe(
         () => this.getUserWithEmail(email)
       )
   }
 
-
   getUserWithEmail(email: string) {
     /** GET User object from server */
+    console.log("update starts...");
     let params = new HttpParams().set("email", email); //Create new HttpParams
     this.http.get<User>(
       'http://localhost:8080/user', {params: params})
       .subscribe(responseUser => {
         let user = new User();
         Object.assign(user, responseUser);
-        this.onUserUpdate.next(user)
+        this.onUserUpdate.next(user);
+        console.log("GET request sent for User object.");
+        console.log(responseUser)
       });
   }
 }

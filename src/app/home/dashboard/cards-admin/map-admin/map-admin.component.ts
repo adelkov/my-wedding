@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Coordinate} from "./coordinate.model";
 import {MapTypeStyle} from "@agm/core";
+import {Marker} from "./marker.model";
+import {MapService} from "./map.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-map-admin',
@@ -9,72 +12,41 @@ import {MapTypeStyle} from "@agm/core";
 })
 export class MapAdminComponent {
 // google maps zoom level
+  markers: Marker[];
+  markersUpdate: Subscription;
+  latCenterView: number = 51.673858;
+  lngCenterView: number = 7.815982;
   zoom: number = 8;
-  styles: MapTypeStyle[] = [{
-    elementType: "labels.icon",
-    stylers: [{
-      color: "#e15875",
-      gamma: 100,
-      saturation: 20
-    }]
-  }]
 
-  // initial center position for the map
-  lat: number = 51.673858;
-  lng: number = 7.815982;
+  constructor(private mapService: MapService) {
+    this.markers = this.mapService.getMarkers();
+    this.markersUpdate = this.mapService.onMarkersUpdate.subscribe((markers) => this.markers = markers)
+  }
 
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
 
   mapClicked(event) {
-    console.log(event);
-    this.markers.push({
-      lat: event.coords.lat,
-      lng: event.coords.lng,
-      label: 'new location',
-      draggable: true
-    });
+    let marker = new Marker(event.coords.lat, event.coords.lng, 'new location', true, true)
+    this.markers.push(marker);
+    for (let m of this.markers){
+      m.isOpen = m.label === marker.label;
+    }
+    this.mapService.saveMarkers(this.markers);
   }
 
   markerDragEnd(m: Marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-
+    this.mapService.saveMarkers(this.markers);
   }
-
-  markers: Marker[] = [
-    {
-      lat: 51.673858,
-      lng: 7.815982,
-      label: 'Wedding chappel',
-      draggable: true
-    },
-    {
-      lat: 51.373858,
-      lng: 7.215982,
-      label: 'Dinner',
-      draggable: true
-    },
-    {
-      lat: 51.723858,
-      lng: 7.895982,
-      label: 'Parking',
-      draggable: true
-    }
-  ]
 
   onLocationClick(m: Marker) {
-
-  }
-
-  openMyInfoWindow(m: Marker) {
-    console.log(m.label+'shold open up')
+    this.latCenterView = m.lat;
+    this.lngCenterView = m.lng;
+    for (let marker of this.markers){
+      marker.isOpen = marker.label === m.label;
+    }
   }
 }
 
-interface Marker {
-  lat: number;
-  lng: number;
-  label: string;
-  draggable: boolean;
-}
+

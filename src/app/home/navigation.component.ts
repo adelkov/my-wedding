@@ -6,7 +6,9 @@ import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {WeddingService} from "./wedding.service";
 import {Wedding} from "./wedding.model";
-import {User} from "./user.model";
+import {MapAdminComponent} from "./dashboard/cards-admin/map-admin/map-admin.component";
+import {MatDialog} from "@angular/material";
+import {NewWeddingDialogComponent} from "./new-wedding-dialog/new-wedding-dialog.component";
 
 @Component({
   selector: 'app-navigation',
@@ -23,7 +25,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   guestWeddings: Wedding[];
   menuOpen = false;
   currentWedding: Wedding;
-  wedding = new Wedding("julizoli", "January 2, 2010", "Budapest", "super wedding");
+  wedding = new Wedding("Another new wedding", "January 2, 2018", "Budapest", "super wedding");
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -31,6 +33,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     );
 
   constructor(
+    public dialog: MatDialog,
     private weddingService: WeddingService,
     private breakpointObserver: BreakpointObserver,
     private route: ActivatedRoute
@@ -51,7 +54,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
           this.guestWeddings = user.guestWeddings;
         }
       );
-    this.setupNavigationButtons()
   }
 
   ngOnDestroy() {
@@ -73,4 +75,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
   updateDashBoard(wedding: Wedding) {
     this.weddingService.onDashboardUpdate.next(wedding)
   }
+
+  openWeddingDialog() {
+    const dialogRef = this.dialog.open(NewWeddingDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+
 }

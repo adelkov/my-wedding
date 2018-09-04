@@ -8,6 +8,8 @@ import { HomeComponent } from './landing/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './home/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -22,7 +24,7 @@ import {
   MatSortModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonToggleModule,
+  MatButtonToggleModule, MatDialog, MatDialogModule, MatNativeDateModule,
 } from '@angular/material';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
@@ -39,6 +41,7 @@ import {MapAdminComponent} from './home/dashboard/cards-admin/map-admin/map-admi
 import {GuestlistService} from "./home/dashboard/cards-admin/guestlist-admin/guestlist.service";
 import {PresentListGuestService} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.service";
 import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-admin/info-card-admin.component';
+import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding-dialog.component';
 
 
 @NgModule({
@@ -53,12 +56,14 @@ import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-a
     MapAdminComponent,
     MarkerInfoComponent,
     InfoCardAdminComponent,
+    NewWeddingDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
+    MatDatepickerModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -69,6 +74,7 @@ import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-a
     MatButtonToggleModule,
     AppRoutingModule,
     MatTableModule,
+    MatDialogModule,
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
@@ -77,17 +83,22 @@ import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-a
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    MatNativeDateModule,
     FlexLayoutModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA'
       }),
     AgmDirectionModule
   ],
+  entryComponents:[
+    NewWeddingDialogComponent
+  ],
   providers: [
     GuestlistService,
     WeddingService,
     PresentListGuestService,
-    GoogleMapsAPIWrapper
+    GoogleMapsAPIWrapper,
+    MatDialog
   ],
   bootstrap: [AppComponent]
 })

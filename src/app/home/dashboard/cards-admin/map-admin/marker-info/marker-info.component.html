@@ -1,2 +1,22 @@
-rename location
-delete location
+<button
+  mat-stroked-button color="accent"
+  (click)="deleteThisMarker()"
+>Delete pin
+</button>
+<form class="example-form" *ngIf="formOpen">
+  <mat-form-field class="example-full-width">
+    <input
+      #newName
+      value=""
+      matInput
+      placeholder="Event location name"
+      (keyup)="saveName($event)"
+    >
+  </mat-form-field>
+</form>
+<br>
+<button
+  *ngIf="!formOpen"
+  (click)="formOpen = true"
+  mat-stroked-button color="warn"
+>Rename pin</button>
