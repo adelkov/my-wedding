@@ -39,9 +39,11 @@ import {GuestDetailComponent} from "./home/dashboard/cards-admin/guestlist-admin
 import {MarkerInfoComponent} from "./home/dashboard/cards-admin/map-admin/marker-info/marker-info.component";
 import {MapAdminComponent} from './home/dashboard/cards-admin/map-admin/map-admin.component';
 import {GuestlistService} from "./home/dashboard/cards-admin/guestlist-admin/guestlist.service";
-import {PresentListGuestService} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.service";
 import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-admin/info-card-admin.component';
 import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding-dialog.component';
+import {PresentListService} from "./services/present-list.service";
+import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-upload/present-upload.component";
+import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding
     MarkerInfoComponent,
     InfoCardAdminComponent,
     NewWeddingDialogComponent,
+    PresentListGuestComponent,
+    PresentUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -96,9 +100,9 @@ import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding
   providers: [
     GuestlistService,
     WeddingService,
-    PresentListGuestService,
     GoogleMapsAPIWrapper,
-    MatDialog
+    MatDialog,
+    PresentListService
   ],
   bootstrap: [AppComponent]
 })

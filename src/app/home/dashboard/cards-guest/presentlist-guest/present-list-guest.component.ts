@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
-import {PresentListGuestService} from "./present-list-guest.service";
 import {Subscription} from "rxjs/Subscription";
-import {Present} from "./present.model";
+import {PresentListService} from "../../../../services/present-list.service";
+import {Present} from "../../../../models/present.model";
 
 @Component({
   selector: 'app-present-guest',
@@ -13,7 +13,7 @@ export class PresentListGuestComponent implements OnInit, OnDestroy{
 
   private presentListSub: Subscription;
   constructor(
-    private presentListGuestService: PresentListGuestService
+    private presentListGuestService: PresentListService
   ) {}
 
   ngOnInit(): void {
