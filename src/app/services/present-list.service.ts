@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs/Subject";
-import {Present} from "./present.model";
+import {Present} from "../models/present.model";
 
-@Injectable()
-export class PresentListGuestService {
+@Injectable({ providedIn: "root" })
+export class PresentListService {
 
   private presentList: Present[] = [];
   private presentsUpdated = new Subject<Present[]>();
@@ -32,5 +32,18 @@ export class PresentListGuestService {
       .subscribe(responseData => {
         console.log(responseData);
       });
+  }
+
+  addPresent(presentName: string, presentLink: string){
+    const present: Present = {id: null, name: presentName, link: presentLink, isTaken: false, owner: null};
+    this.httpClient
+      .post<{ message: string, presentId: number }>
+      ('http://localhost:3000/api/presents', present)
+      .subscribe(responseData => {
+        console.log(responseData.message);
+        present.id = responseData.presentId;
+        this.presentList.push(present);
+        this.presentsUpdated.next([...this.presentList]);
+      })
   }
 }
