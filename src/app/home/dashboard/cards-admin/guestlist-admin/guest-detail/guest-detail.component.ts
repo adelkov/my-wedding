@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
-import {GuestlistService} from "../guestlist.service";
+import {GuestlistService} from "../../../../../services/guestlist.service";
 
 @Component({
   selector: 'app-guest-detail',

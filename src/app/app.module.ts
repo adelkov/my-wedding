@@ -28,7 +28,7 @@ import {
 } from '@angular/material';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import {WeddingService} from "./home/wedding.service";
+import {WeddingService} from "./services/wedding.service";
 import { UserCardComponent } from './home/user-card/user-card.component';
 
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -38,7 +38,7 @@ import {GuestlistAdminComponent} from "./home/dashboard/cards-admin/guestlist-ad
 import {GuestDetailComponent} from "./home/dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component";
 import {MarkerInfoComponent} from "./home/dashboard/cards-admin/map-admin/marker-info/marker-info.component";
 import {MapAdminComponent} from './home/dashboard/cards-admin/map-admin/map-admin.component';
-import {GuestlistService} from "./home/dashboard/cards-admin/guestlist-admin/guestlist.service";
+import {GuestlistService} from "./services/guestlist.service";
 import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-admin/info-card-admin.component';
 import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding-dialog.component';
 import {PresentListService} from "./services/present-list.service";

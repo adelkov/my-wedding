@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Marker} from "../marker.model";
-import {MapService} from "../map.service";
+import {Marker} from "../../../../../models/marker.model";
+import {MapService} from "../../../../../services/map.service";
 
 @Component({
   selector: 'app-marker-info',

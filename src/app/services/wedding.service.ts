@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Wedding} from "./wedding.model";
+import {Wedding} from "../models/wedding.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {User} from "./user.model";
+import {User} from "../models/user.model";
 import "rxjs-compat/add/operator/map";
 import {Subject} from "rxjs/Subject";
 

@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {Wedding} from "../../../wedding.model";
-import {WeddingService} from "../../../wedding.service";
+import {Wedding} from "../../../../models/wedding.model";
+import {WeddingService} from "../../../../services/wedding.service";
 import {Subscription} from "rxjs/Subscription";
 
 @Component({

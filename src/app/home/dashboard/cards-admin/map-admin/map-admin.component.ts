@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Coordinate} from "./coordinate.model";
 import {MapTypeStyle} from "@agm/core";
-import {Marker} from "./marker.model";
-import {MapService} from "./map.service";
+import {Marker} from "../../../../models/marker.model";
+import {MapService} from "../../../../services/map.service";
 import {Subscription} from "rxjs/Subscription";
 
 @Component({

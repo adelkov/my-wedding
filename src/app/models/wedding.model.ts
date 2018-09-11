@@ -1,4 +1,3 @@
-import {Guest} from "./dashboard/cards-admin/guestlist-admin/guest.model";
 
 export class Wedding {
   name: string;

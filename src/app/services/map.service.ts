@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Marker} from "./marker.model";
+import {Marker} from "../models/marker.model";
 import {Subject} from "rxjs/Subject";
 
 @Injectable({

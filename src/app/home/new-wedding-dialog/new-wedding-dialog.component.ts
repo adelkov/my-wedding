@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Inject, OnInit, Output, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {Wedding} from "../wedding.model";
+import {Wedding} from "../../models/wedding.model";
 import {NgForm} from "@angular/forms";
-import {WeddingService} from "../wedding.service";
+import {WeddingService} from "../../services/wedding.service";
 
 @Component({
   selector: 'app-new-wedding-dialog',

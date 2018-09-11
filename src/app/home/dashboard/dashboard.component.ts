@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {Wedding} from "../wedding.model";
+import {Wedding} from "../../models/wedding.model";
 
 @Component({
   selector: 'app-dashboard',
