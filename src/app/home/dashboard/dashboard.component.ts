@@ -13,5 +13,24 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit() {
     // ToDo: getting wedding details via wedding-name AJAX
+    console.log("on init");
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((data) => data.json())
+      .then(data => console.log(data))
+      .catch((error) => console.log("error: " + error));
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(json => console.log(json));
   }
 }

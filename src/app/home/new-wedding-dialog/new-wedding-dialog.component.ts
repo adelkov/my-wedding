@@ -22,6 +22,7 @@ export class NewWeddingDialogComponent implements OnInit {
   }
 
   onSubmit(){
+
     console.log("submission");
     this.newWedding.name = this.newWeddingForm.value.name;
     this.newWedding.date = this.newWeddingForm.value.date;
@@ -31,5 +32,4 @@ export class NewWeddingDialogComponent implements OnInit {
     console.log("wedding added");
     this.dialogRef.close();
   }
-
 }
