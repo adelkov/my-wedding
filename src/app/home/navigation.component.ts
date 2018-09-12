@@ -41,12 +41,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // subscribe and get ever changing parameters to update model
-    this.subURL = this.route.params.subscribe(
-      (params) => {
-        this.id = params['weddingname'];
-      }
-    );
     this.subUserUpdate = this.weddingService.onUserUpdate
       .subscribe(
         (user) => {

@@ -11,14 +11,21 @@ import {Subscription} from "rxjs/Subscription";
 export class InfoCardAdminComponent implements OnInit {
 
   private subDashboardUpdate: Subscription;
+
   currentWedding: Wedding;
 
-  constructor(private weddingService: WeddingService) { }
+  constructor(
+    private weddingService: WeddingService
+  ) {
+  }
 
   ngOnInit() {
     this.subDashboardUpdate = this.weddingService.onDashboardUpdate
       .subscribe(
-        (wedding) => this.currentWedding = wedding
+        (wedding) => {
+          this.currentWedding = wedding;
+          console.log("info got wedding: "+this.currentWedding.name)
+        }
       )
   }
 }

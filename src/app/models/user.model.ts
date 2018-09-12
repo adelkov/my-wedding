@@ -6,10 +6,12 @@ export class User {
   private _guestWeddings: Wedding[];
   private _id: number;
 
-
-  constructor(){
+  constructor(email: string, myWeddings: Wedding[], guestWeddings: Wedding[], id: number) {
+    this._email = email;
+    this._myWeddings = myWeddings;
+    this._guestWeddings = guestWeddings;
+    this._id = id;
   }
-
 
   get email(): string {
     return this._email;
