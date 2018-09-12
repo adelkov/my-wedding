@@ -23,21 +23,15 @@ export class MapAdminComponent {
     this.markersUpdate = this.mapService.onMarkersUpdate.subscribe((markers) => this.markers = markers)
   }
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
-  }
-
   mapClicked(event) {
     let marker = new Marker(event.coords.lat, event.coords.lng, 'new location', true, true)
-    this.markers.push(marker);
-    for (let m of this.markers){
-      m.isOpen = m.label === marker.label;
-    }
-    this.mapService.saveMarkers(this.markers);
+    this.mapService.addMarker(marker);
   }
 
-  markerDragEnd(m: Marker, $event: MouseEvent) {
-    this.mapService.saveMarkers(this.markers);
+  markerDragEnd(m: Marker, event: any) {
+    m.lat =  event.coords.lat;
+    m.lng =  event.coords.lng;
+    this.mapService.updateMarker(m);
   }
 
   onLocationClick(m: Marker) {

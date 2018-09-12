@@ -2,10 +2,15 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NavigationComponent} from "./home/navigation.component";
 import {HomeComponent} from "./landing/home.component";
+import {DashboardComponent} from "./home/dashboard/dashboard.component";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
-  {path: 'wedding/:id', component: NavigationComponent},
+  {
+    path: 'wedding', component: NavigationComponent, children: [
+      {path: ':weddingName', component: DashboardComponent}
+    ]
+  },
   {path: '**', redirectTo: ''} // todo: /not-found page
 ]
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Marker} from "../models/marker.model";
 import {Subject} from "rxjs/Subject";
 
@@ -7,23 +7,19 @@ import {Subject} from "rxjs/Subject";
 })
 export class MapService {
   onMarkersUpdate = new Subject<Marker[]>();
-  markers = [
-    new Marker( 51.673858, 7.815982, 'Wedding chappel', true, false),
-    new Marker( 51.673858, 7.815982, 'Dinner', true, false),
-    new Marker( 51.673858, 7.815982, 'Parking', true, false)
-  ];
+  markers: Marker[];
 
-  constructor() { }
-
-  getMarkers() :Marker[] {
-    // http get markers
-    return this.markers.slice();
+  constructor() {
+    this.markers = this.getMarkers();
   }
 
-  saveMarkers(markers: Marker[]) {
-    // http post markers
-    // fire subject to update markers view
-    this.onMarkersUpdate.next(this.markers)
+  updateMarker(marker: Marker) {
+
+  }
+
+  addMarker(marker: Marker) {
+    this.markers.push(marker);
+    this.saveMarkers();
   }
 
   deleteMarker(marker: Marker) {
@@ -31,6 +27,15 @@ export class MapService {
     if (index > -1) {
       this.markers.splice(index, 1);
     }
-    this.saveMarkers(this.markers);
+    this.saveMarkers();
+  }
+
+  saveMarkers() {
+    localStorage.setItem('markers', JSON.stringify(this.markers));
+    this.onMarkersUpdate.next(this.markers);
+  }
+
+  getMarkers() {
+    return JSON.parse(localStorage.getItem('markers'));
   }
 }

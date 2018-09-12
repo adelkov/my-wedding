@@ -36,6 +36,7 @@
         </a>
         <br>
       </div>
+      <a mat-stroked-button color="warn" routerLink="/wedding/testWedding">Test wedding</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -46,6 +47,7 @@
       mat-icon-button
       (click)="drawer.toggle(); toggleMenuIcon()"
     >
+
       <mat-icon aria-label="Side nav toggle icon">
         <i class="material-icons" *ngIf="!menuOpen">
           arrow_back_ios
@@ -55,6 +57,6 @@
         </i>
       </mat-icon>
     </button>
-    <app-dashboard></app-dashboard>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
