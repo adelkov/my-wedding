@@ -45,6 +45,14 @@ export class WeddingService implements OnInit {
       );
   }
 
+  getWedding(): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/todos/1')
+      .map((response: Response)=> {
+        return response
+      })
+
+  }
+
   getUserWithEmail(email: string) {
     /** GET User object from server */
     let params = new HttpParams().set("email", email); //Create new HttpParams
@@ -55,7 +63,6 @@ export class WeddingService implements OnInit {
           this.onUserUpdate.next(responseUser);
         },
         (error) => {
-          console.log("error gets called in wedding service");
           this.onUserUpdate.next(
             new User("email",
               [new Wedding("teszt Wedding", "date", "pa", "de")],

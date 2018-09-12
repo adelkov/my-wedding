@@ -1,8 +1,10 @@
 <div class="grid-container">
   <mat-card>
+
+
     <app-info-card-admin></app-info-card-admin>
   </mat-card>
-  <mat-card>
+  <mat-card id="guest-list">
     <div class="container"
          fxLayout="row"
          fxLayout.xs="column"
@@ -17,13 +19,13 @@
       </div>
     </div>
   </mat-card>
-  <mat-card>
+  <mat-card id="locations">
     <app-map-admin></app-map-admin>
   </mat-card>
 
   <mat-card>
   </mat-card>
-  <mat-card>
+  <mat-card id="present-list">
     <app-present-guest></app-present-guest>
   </mat-card>
   <mat-card>

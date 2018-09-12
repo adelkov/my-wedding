@@ -1,5 +1,5 @@
 <h1><i class="fas fa-map-marked-alt fa-2x cardIcon"></i>
-   Event locations</h1>
+  Event locations</h1>
 <div class="container"
      fxLayout="row"
      fxLayout.xs="column"
@@ -7,17 +7,7 @@
      fxLayoutGap="0.5%"
      fxLayoutAlign="center">
   <div fxFlex="30%">
-    <mat-card>
-      Click on the map to add new location!
-    </mat-card>
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [vertical]="true">
-      <mat-button-toggle
-        *ngFor="let marker of markers"
-        value="{{marker.label}}"
-        (click)="onLocationClick(marker)"
-      >{{marker.label}}
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+    Click on the map to add location!
   </div>
   <div fxFlex="70%">
     <agm-map
@@ -28,24 +18,23 @@
       [zoomControl]="false"
       (mapClick)="mapClicked($event)">
 
-      <agm-marker
-        *ngFor="let marker of markers; let i = index"
-        (markerClick)="clickedMarker(marker.label, i)"
-        [latitude]="marker.lat"
-        [longitude]="marker.lng"
-        [label]="marker.label"
-        [markerDraggable]="marker.draggable"
-        (dragEnd)="markerDragEnd(marker, $event)">
-        <agm-info-window
-          #infoWindow
-          [isOpen]="marker.isOpen"
-        >
-          <h2>{{marker.label}}</h2>
-          <app-marker-info
-            [marker]="marker"
-          ></app-marker-info>
-        </agm-info-window>
-      </agm-marker>
+      <div *ngFor="let marker of markers;">
+        <agm-marker
+          *ngIf="marker.isVisible"
+          [latitude]="marker.lat"
+          [longitude]="marker.lng"
+          [markerDraggable]="marker.draggable"
+          (dragEnd)="markerDragEnd(marker, $event)">
+          <agm-info-window
+            #infoWindow
+            [isOpen]="marker.isOpen"
+          >
+            <app-marker-info
+              [marker]="marker"
+            ></app-marker-info>
+          </agm-info-window>
+        </agm-marker>
+      </div>
     </agm-map>
   </div>
 </div>

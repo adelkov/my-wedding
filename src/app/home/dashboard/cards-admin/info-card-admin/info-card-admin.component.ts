@@ -2,6 +2,8 @@ import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {Wedding} from "../../../../models/wedding.model";
 import {WeddingService} from "../../../../services/wedding.service";
 import {Subscription} from "rxjs/Subscription";
+import {share} from "rxjs/operators";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-info-card-admin',
@@ -10,9 +12,7 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class InfoCardAdminComponent implements OnInit {
 
-  private subDashboardUpdate: Subscription;
-
-  currentWedding: Wedding;
+  currentWedding: Observable<any>;
 
   constructor(
     private weddingService: WeddingService
@@ -20,12 +20,6 @@ export class InfoCardAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subDashboardUpdate = this.weddingService.onDashboardUpdate
-      .subscribe(
-        (wedding) => {
-          this.currentWedding = wedding;
-          console.log("info got wedding: "+this.currentWedding.name)
-        }
-      )
+    this.currentWedding = this.weddingService.getWedding().pipe(share());
   }
 }

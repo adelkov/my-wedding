@@ -1,3 +1,10 @@
-<h1><i class="fas fa-info-circle fa-2x"></i>
-  {{ currentWedding.name }}
-</h1>
+<div *ngIf="currentWedding | async; let currentWedding; else loading">
+
+  <h1><i class="fas fa-info-circle fa-2x"></i>
+    {{ currentWedding.title}} <br>
+    {{ currentWedding.id}}<br>
+    {{ currentWedding.userId}}<br>
+  </h1>
+</div>
+<ng-template #loading>Loading User Data...</ng-template>
+

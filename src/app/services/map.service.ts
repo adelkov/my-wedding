@@ -7,17 +7,25 @@ import {Subject} from "rxjs/Subject";
 })
 export class MapService {
   onMarkersUpdate = new Subject<Marker[]>();
+  markerSchema = [
+    {label: "Church", icon: "fas fa-church"},
+    {label: "Dinner", icon: "fas fa-utensils"},
+    {label: "Party", icon: "fas fa-music"},
+    {label: "Parking", icon: "fas fa-parking"}
+  ];
   markers: Marker[];
+  allowCreation : boolean;
 
   constructor() {
-    this.markers = this.getMarkers();
+    this.markers = this.getMarkers() ? this.getMarkers() : [];
+    this.allowCreation = true;
   }
 
   updateMarker(marker: Marker) {
-
   }
 
   addMarker(marker: Marker) {
+    marker.isOpen = false;
     this.markers.push(marker);
     this.saveMarkers();
   }
@@ -37,5 +45,9 @@ export class MapService {
 
   getMarkers() {
     return JSON.parse(localStorage.getItem('markers'));
+  }
+
+  udpateMarker(marker: Marker) {
+    this.markers
   }
 }

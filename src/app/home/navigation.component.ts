@@ -80,6 +80,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
       console.log(result);
     });
   }
+  goTo(location: string): void {
+    let wait = 100;
+    const element = document.querySelector('#' + location);
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+      }, wait)
+    }
+  }
 
 
 }

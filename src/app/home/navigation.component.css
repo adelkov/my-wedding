@@ -46,3 +46,8 @@ mat-sidenav {
 button.sidenav-button {
   width: 100%;
 }
+
+
+mat-toolbar {
+  position: fixed;
+}
