@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs/Subject";
 import {Present} from "../models/present.model";
+import {map} from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class PresentListService {
@@ -16,13 +17,23 @@ export class PresentListService {
   }
 
   getPresentList(){
-    this.httpClient.get<{message: string, data: Present[] }>(
+    this.httpClient.get<{message: string, presents: any }>(
      'http://localhost:3000/api/presents')
-      .subscribe(responseData => {
-        this.presentList = responseData.data;
+      .pipe(map((responseData) => {
+        return responseData.presents.map(present => {
+          return {
+            id: present._id,
+            name: present.name,
+            link: present.link,
+            owner: present.owner,
+            isTaken: present.isTaken
+          };
+        });
+      }))
+      .subscribe(transformedData => {
+        this.presentList = transformedData;
         this.presentsUpdated.next([...this.presentList])
       });
-    return this.presentList;
   }
 
   presentSelected(presentId: number){
