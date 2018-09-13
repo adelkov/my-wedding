@@ -27,9 +27,8 @@ export class NewWeddingDialogComponent implements OnInit {
     this.newWedding.name = this.newWeddingForm.value.name;
     this.newWedding.date = this.newWeddingForm.value.date;
     this.newWedding.place = this.newWeddingForm.value.name;
-    this.newWedding.description = this.newWeddingForm.value.description;
-    this.weddingService.addNewWedding("juli@ema.il", this.newWedding);
-    console.log("wedding added");
+    this.newWedding.descr = this.newWeddingForm.value.description;
+    this.weddingService.addNewWedding( this.newWedding);
     this.dialogRef.close();
   }
 }

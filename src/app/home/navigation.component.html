@@ -7,39 +7,40 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
 
-      <!--<div class="company-logo">My Wedding</div>-->
+    <!--<div class="company-logo">My Wedding</div>-->
     <app-user-card></app-user-card>
     <h2>My weddings:</h2>
-    <mat-nav-list>
-      <a
-        class="sidenav-button"
-        mat-stroked-button color="primary"
-         *ngFor="let wedding of myWeddings"
-         routerLink="/wedding/{{wedding.name}}">
-        {{ wedding.name }}
-      </a>
-      <button class="sidenav-button" mat-stroked-button color="alert" (click)="openWeddingDialog()">
-        +
-      </button>
+    <!--<mat-nav-list>-->
+    <!--<a-->
+    <!--class="sidenav-button"-->
+    <!--mat-stroked-button color="primary"-->
+    <!--*ngFor="let wedding of myWeddings"-->
+    <!--routerLink="/wedding/{{wedding.name}}">-->
+    <!--{{ wedding.name }}-->
+    <!--</a>-->
+    <button class="sidenav-button" mat-stroked-button color="alert" (click)="openWeddingDialog()">
+      +
+    </button>
 
-    </mat-nav-list>
+    <!--</mat-nav-list>-->
     <h2>Guest weddings:</h2>
-    <mat-nav-list>
-      <div *ngFor="let wedding of guestWeddings">
-        <a
-          class="sidenav-button"
-          mat-stroked-button color="warn"
-           routerLink="/wedding/{{wedding.name}}"
-           (click)="updateDashBoard(wedding)"
-        >
-          {{ wedding.name }}
-        </a>
-        <br>
-      </div>
-      <a mat-stroked-button color="warn" routerLink="/wedding/testWedding">Test wedding</a>
-      <a mat-stroked-button color="warn" routerLink="/wedding/testWedding2">Test wedding 2</a>
-      <a mat-stroked-button color="warn" routerLink="/wedding/testWedding3">Test wedding 3</a>
-    </mat-nav-list>
+    <div *ngIf="myWeddings | async; let myWeddings; else loading">
+
+      <mat-nav-list>
+        <div *ngFor="let wedding of myWeddings">
+          <a
+            class="sidenav-button"
+            mat-stroked-button color="warn"
+            routerLink="/wedding/{{wedding.name}}"
+          >
+            {{ wedding.name }}
+          </a>
+          <br>
+        </div>
+      </mat-nav-list>
+    </div>
+    <ng-template #loading>Loading User Data...</ng-template>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <button
@@ -60,9 +61,9 @@
       </mat-icon>
     </button>
     <!--<mat-toolbar>-->
-      <!--<a (click)="goTo('guest-list')" >Guest list</a>-->
-      <!--<a (click)="goTo('locations')" >Locations</a>-->
-      <!--<a (click)="goTo('present-list')" >Present list</a>-->
+    <!--<a (click)="goTo('guest-list')" >Guest list</a>-->
+    <!--<a (click)="goTo('locations')" >Locations</a>-->
+    <!--<a (click)="goTo('present-list')" >Present list</a>-->
     <!--</mat-toolbar>-->
     <router-outlet></router-outlet>
   </mat-sidenav-content>

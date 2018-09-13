@@ -14,6 +14,8 @@ export class WeddingService implements OnInit {
   wedding: Wedding;
   public onUserUpdate = new Subject<User>();
   public onDashboardUpdate = new Subject<Wedding>();
+  userid = "5b9a5b64aaff7f0015d7121a";
+
 
   constructor(
     private http: HttpClient,
@@ -23,27 +25,18 @@ export class WeddingService implements OnInit {
   ngOnInit() {
   }
 
-  addNewWedding(email: string, wedding: Wedding) {
+  addNewWedding(wedding: Wedding) {
     // POST new wedding to server
 
-    let params = new HttpParams().set("email", email);
-    return this.http.post('http://localhost:8080/newwedding', wedding, {params: params})
+    return this.http.post('https://my-wedding-backend.herokuapp.com/api/weddings/' + this.userid, wedding)
       .subscribe(
-        () => this.getUserWithEmail(email)
+        (wedding) => console.log(wedding),
+        (error) => {
+          console.log(error)
+        }
       )
   }
 
-  udpateWedding(weddingName: String): void {
-    this.http.get<Wedding>(
-      'http://localhost:8080/wedding/' + weddingName)
-      .subscribe(
-        wedding => console.log(wedding),
-        (err) => { // for mocking purposes
-          let wedding = new Wedding("My first wedding", "dateMock", "placeMock", "descrMock");
-          this.onDashboardUpdate.next(wedding);
-        }
-      );
-  }
 
   getWedding(): Observable<any> {
     return this.http.get('https://jsonplaceholder.typicode.com/todos/1')
@@ -53,23 +46,14 @@ export class WeddingService implements OnInit {
       )
   }
 
-  getUserWithEmail(email: string) {
+  getUserWithId() {
     /** GET User object from server */
-    let params = new HttpParams().set("email", email); //Create new HttpParams
-    this.http.get<User>(
-      'http://localhost:8080/user', {params: params})
-      .subscribe(
-        responseUser => {
-          this.onUserUpdate.next(responseUser);
-        },
-        (error) => {
-          this.onUserUpdate.next(
-            new User("email",
-              [new Wedding("teszt Wedding", "date", "pa", "de")],
-              [new Wedding("teszt Wedding", "date", "pa", "de")],
-              12)
-          )
+    return this.http.get<string[]>(
+      'https://my-wedding-backend.herokuapp.com/api/users/' + this.userid)
+      .map((response) => {
+          console.log(response["user"]["myWeddings"]);
+          return response["user"]["myWeddings"]
         }
-      );
+      )
   }
 }

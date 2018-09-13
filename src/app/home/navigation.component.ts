@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, share} from 'rxjs/operators';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {WeddingService} from "../services/wedding.service";
@@ -18,14 +18,11 @@ import {NewWeddingDialogComponent} from "./new-wedding-dialog/new-wedding-dialog
 export class NavigationComponent implements OnInit, OnDestroy {
 
   id: String;
-  email = "juli@ema.il"; // todo get from Auth0
   subURL: Subscription;
   subUserUpdate: Subscription;
-  myWeddings: Wedding[];
+  myWeddings: Observable<String[]>;
   guestWeddings: Wedding[];
   menuOpen = false;
-  currentWedding: Wedding;
-  wedding = new Wedding("Another new wedding", "January 2, 2018", "Budapest", "super wedding");
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -41,13 +38,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subUserUpdate = this.weddingService.onUserUpdate
-      .subscribe(
-        (user) => {
-          this.myWeddings = user.myWeddings;
-          this.guestWeddings = user.guestWeddings;
-        }
-      );
+    this.myWeddings = this.weddingService.getUserWithId().pipe(share());
   }
 
   ngOnDestroy() {
@@ -56,14 +47,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   toggleMenuIcon() {
     this.menuOpen = !this.menuOpen;
-  }
-
-  onAddNewWedding() {
-    this.weddingService.addNewWedding(this.email, this.wedding);
-  }
-
-  setupNavigationButtons() {
-    this.weddingService.getUserWithEmail(this.email);
   }
 
   updateDashBoard(wedding: Wedding) {
@@ -80,6 +63,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       console.log(result);
     });
   }
+
   goTo(location: string): void {
     let wait = 100;
     const element = document.querySelector('#' + location);
