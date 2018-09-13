@@ -44,6 +44,8 @@ import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding
 import {PresentListService} from "./services/present-list.service";
 import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-upload/present-upload.component";
 import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
+import {CallbackComponent} from "./callback.component";
+import {AuthService} from "./auth/auth.service";
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlis
     InfoCardAdminComponent,
     NewWeddingDialogComponent,
     PresentListGuestComponent,
-    PresentUploadComponent
+    PresentUploadComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +105,8 @@ import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlis
     WeddingService,
     GoogleMapsAPIWrapper,
     MatDialog,
-    PresentListService
+    PresentListService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

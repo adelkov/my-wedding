@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Subject} from "rxjs/Subject";
 import {Present} from "../models/present.model";
+import {AuthService} from "../auth/auth.service";
 
 @Injectable({ providedIn: "root" })
 export class PresentListService {
@@ -9,15 +10,18 @@ export class PresentListService {
   private presentList: Present[] = [];
   private presentsUpdated = new Subject<Present[]>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private authService: AuthService) {}
 
   getPresentListUpdateListener() {
     return this.presentsUpdated.asObservable();
   }
 
   getPresentList(){
+    console.log(this.authService.accessToken);
     this.httpClient.get<{message: string, data: Present[] }>(
-     'http://localhost:3000/api/presents')
+     'http://localhost:3000/api/presents', {
+       headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.accessToken}`)
+      })
       .subscribe(responseData => {
         this.presentList = responseData.data;
         this.presentsUpdated.next([...this.presentList])

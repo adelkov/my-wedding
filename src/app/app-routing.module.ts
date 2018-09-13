@@ -2,10 +2,19 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NavigationComponent} from "./home/navigation.component";
 import {HomeComponent} from "./landing/home.component";
+import {CallbackComponent} from "./callback.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
-  {path: 'wedding/:id', component: NavigationComponent},
+  {path: 'callback', component: CallbackComponent},
+  {
+    path: 'wedding/:id',
+    component: NavigationComponent,
+    /*canActivate: [
+      AuthGuard
+    ]*/
+  },
   {path: '**', redirectTo: ''} // todo: /not-found page
 ]
 
@@ -30,6 +39,7 @@ const appRoutes: Routes = [
     // RouterModule.forRoot(appRoutes, {useHash: true})
     RouterModule.forRoot(appRoutes)
   ],
+  providers: [AuthGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
