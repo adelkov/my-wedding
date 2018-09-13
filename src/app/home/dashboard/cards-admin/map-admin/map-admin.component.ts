@@ -23,10 +23,7 @@ export class MapAdminComponent implements OnInit {
   public searchElementRef: ElementRef;
 
   ngOnInit() {
-//create search FormControl
     this.searchControl = new FormControl();
-
-    //set current position
     this.setCurrentPosition();
 
     //load Places Autocomplete
@@ -47,7 +44,7 @@ export class MapAdminComponent implements OnInit {
           //set latitude, longitude and zoom
           this.latCenterView = place.geometry.location.lat();
           this.lngCenterView = place.geometry.location.lng();
-          this.zoom = 12;
+          this.zoom = 16;
         });
       });
     });
