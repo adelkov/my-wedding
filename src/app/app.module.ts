@@ -91,9 +91,11 @@ import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlis
     MatNativeDateModule,
     FlexLayoutModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA'
+      apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA',
+      libraries: ["places"]
     }),
-    AgmDirectionModule
+    AgmDirectionModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     NewWeddingDialogComponent

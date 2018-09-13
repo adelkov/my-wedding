@@ -1,40 +1,36 @@
 <h1><i class="fas fa-map-marked-alt fa-2x cardIcon"></i>
   Event locations</h1>
-<div class="container"
-     fxLayout="row"
-     fxLayout.xs="column"
-     fxLayoutWrap
-     fxLayoutGap="0.5%"
-     fxLayoutAlign="center">
-  <div fxFlex="30%">
-    Click on the map to add location!
-  </div>
-  <div fxFlex="70%">
-    <agm-map
-      [latitude]="latCenterView"
-      [longitude]="lngCenterView"
-      [zoom]="zoom"
-      [disableDefaultUI]="false"
-      [zoomControl]="false"
-      (mapClick)="mapClicked($event)">
 
-      <div *ngFor="let marker of markers;">
-        <agm-marker
-          *ngIf="marker.isVisible"
-          [latitude]="marker.lat"
-          [longitude]="marker.lng"
-          [markerDraggable]="marker.draggable"
-          (dragEnd)="markerDragEnd(marker, $event)">
-          <agm-info-window
-            #infoWindow
-            [isOpen]="marker.isOpen"
-          >
-            <app-marker-info
-              [marker]="marker"
-            ></app-marker-info>
-          </agm-info-window>
-        </agm-marker>
-      </div>
-    </agm-map>
-  </div>
+Click on the map to add location!
+<div class="form-group">
+  <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
 </div>
+<agm-map
+  [latitude]="latCenterView"
+  [longitude]="lngCenterView"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
+
+  <div *ngIf="markers | async; let markers; else loading">
+    <div *ngFor="let marker of markers;">
+      <agm-marker
+        *ngIf="marker.isVisible"
+        [latitude]="marker.lat"
+        [longitude]="marker.lng"
+        [markerDraggable]="marker.draggable"
+        (dragEnd)="markerDragEnd(marker, $event)">
+        <agm-info-window
+          #infoWindow
+          [isOpen]="marker.isOpen"
+        >
+          <app-marker-info
+            [marker]="marker"
+          ></app-marker-info>
+        </agm-info-window>
+      </agm-marker>
+    </div>
+  </div>
+  <ng-template #loading>Loading Markers Data...</ng-template>
+</agm-map>

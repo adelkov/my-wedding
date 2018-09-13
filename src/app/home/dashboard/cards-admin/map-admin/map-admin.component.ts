@@ -1,37 +1,86 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Marker} from "../../../../models/marker.model";
 import {MapService} from "../../../../services/map.service";
-import {Subscription} from "rxjs/Subscription";
+import {share} from "rxjs/operators";
+import {Observable} from "rxjs/Observable";
+import { FormControl } from '@angular/forms';
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-map-admin',
   templateUrl: './map-admin.component.html',
   styleUrls: ['./map-admin.component.css']
 })
-export class MapAdminComponent {
-// google maps zoom level
-  markers: Marker[];
-  markersUpdate: Subscription;
+export class MapAdminComponent implements OnInit {
+  markers: Observable<Marker[]>;
   latCenterView: number = 51.673858;
   lngCenterView: number = 7.815982;
   zoom: number = 8;
+  public searchControl: FormControl;
 
-  constructor(private mapService: MapService) {
-    this.markers = this.mapService.getMarkers() ? this.mapService.getMarkers() : [];
-    this.mapService.allowCreation = !(this.markers.length === 4);
-    this.markersUpdate = this.mapService.onMarkersUpdate.subscribe((markers) => this.markers = markers)
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
+  ngOnInit() {
+//create search FormControl
+    this.searchControl = new FormControl();
+
+    //set current position
+    this.setCurrentPosition();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latCenterView = place.geometry.location.lat();
+          this.lngCenterView = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
   }
 
-  mapClicked(event) {
-    if (!this.mapService.allowCreation) return;
-    let marker = new Marker(event.coords.lat, event.coords.lng, '', '', true, true);
-    marker.isVisible = true;
-    this.markers.push(marker);
+  constructor(
+    private mapService: MapService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) {
+    this.markers = this.mapService.getMarkers().pipe(share());
   }
 
-  markerDragEnd(m: Marker, event: any) {
-    m.lat = event.coords.lat;
-    m.lng = event.coords.lng;
-    this.mapService.updateMarker(m);
+  mapClicked(event: any) {
+    let newMarker = new Marker(event.coords.lat, event.coords.lng);
+    this.mapService.addMarker(newMarker);
+    this.markers = this.mapService.getMarkers().pipe(share());
+  }
+
+  markerDragEnd(marker: Marker, event: any) {
+    marker.lng = event.coords.lng;
+    marker.lat = event.coords.lat;
+    marker.isOpen = false;
+    this.mapService.update(marker);
+  }
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latCenterView = position.coords.latitude;
+        this.lngCenterView = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
   }
 }

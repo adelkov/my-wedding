@@ -18,7 +18,6 @@ export class MarkerInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.markerSchemas = this.mapService.markerSchema;
   }
 
   deleteThisMarker() {
@@ -26,13 +25,5 @@ export class MarkerInfoComponent implements OnInit {
   }
 
   chosenSchema(marker: { label: string; icon: string }) {
-    this.marker.label = marker.label;
-    this.marker.icon = marker.icon;
-    this.formOpen = false;
-    let index = this.markerSchemas.indexOf(marker);
-    this.markerSchemas.splice(index, 1);
-    this.mapService.addMarker(this.marker);
-    if (this.markerSchemas.length === 0) this.mapService.allowCreation = false;
-    console.log(this.mapService.allowCreation)
   }
 }

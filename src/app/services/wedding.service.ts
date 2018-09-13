@@ -47,10 +47,10 @@ export class WeddingService implements OnInit {
 
   getWedding(): Observable<any> {
     return this.http.get('https://jsonplaceholder.typicode.com/todos/1')
-      .map((response: Response)=> {
-        return response
-      })
-
+      .map((response: Response) => {
+          return response
+        }
+      )
   }
 
   getUserWithEmail(email: string) {
