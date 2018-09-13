@@ -61,11 +61,7 @@ export class MapAdminComponent implements OnInit {
     this.markers = this.mapService.getMarkers().pipe(share());
   }
 
-  mapClicked(event: any) {
-    let newMarker = new Marker(event.coords.lat, event.coords.lng);
-    this.mapService.addMarker(newMarker);
-    this.markers = this.mapService.getMarkers().pipe(share());
-  }
+
 
   markerDragEnd(marker: Marker, event: any) {
     marker.lng = event.coords.lng;
@@ -79,6 +75,8 @@ export class MapAdminComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latCenterView = position.coords.latitude;
         this.lngCenterView = position.coords.longitude;
+        let marker =  new Marker(this.latCenterView, this.lngCenterView);
+        this.mapService.addMarker(marker);
         this.zoom = 12;
       });
     }

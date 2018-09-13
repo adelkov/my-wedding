@@ -9,7 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationComponent} from './home/navigation.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { environment } from '../environments/environment';
 
 import {
   MatToolbarModule,
@@ -91,7 +91,7 @@ import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlis
     MatNativeDateModule,
     FlexLayoutModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA',
+      apiKey: environment.agm_api,
       libraries: ["places"]
     }),
     AgmDirectionModule,

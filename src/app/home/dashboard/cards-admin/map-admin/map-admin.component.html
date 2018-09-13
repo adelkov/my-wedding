@@ -1,17 +1,20 @@
 <h1><i class="fas fa-map-marked-alt fa-2x cardIcon"></i>
   Event locations</h1>
 
-Click on the map to add location!
-<div class="form-group">
-  <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-</div>
+<mat-form-field appearance="outline" class="form-group">
+  <mat-label>Add new location!</mat-label>
+  <input matInput placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+         class="form-control" #search [formControl]="searchControl">
+  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  <mat-hint>i.e. Budapest</mat-hint>
+</mat-form-field>
 <agm-map
   [latitude]="latCenterView"
   [longitude]="lngCenterView"
   [zoom]="zoom"
   [disableDefaultUI]="false"
   [zoomControl]="false"
-  (mapClick)="mapClicked($event)">
+  >
 
   <div *ngIf="markers | async; let markers; else loading">
     <div *ngFor="let marker of markers;">
@@ -19,7 +22,7 @@ Click on the map to add location!
         *ngIf="marker.isVisible"
         [latitude]="marker.lat"
         [longitude]="marker.lng"
-        [markerDraggable]="marker.draggable"
+        [markerDraggable]="true"
         (dragEnd)="markerDragEnd(marker, $event)">
         <agm-info-window
           #infoWindow
