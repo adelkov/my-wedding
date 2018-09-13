@@ -22,7 +22,16 @@ export class MapAdminComponent implements OnInit {
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
+  constructor(
+    private mapService: MapService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) {
+    this.markers = this.mapService.markerUpdate.asObservable();
+  }
+
   ngOnInit() {
+    this.mapService.getMarkers();
     this.searchControl = new FormControl();
     this.setCurrentPosition();
 
@@ -44,20 +53,13 @@ export class MapAdminComponent implements OnInit {
           //set latitude, longitude and zoom
           this.latCenterView = place.geometry.location.lat();
           this.lngCenterView = place.geometry.location.lng();
-          this.zoom = 16;
+          let marker =  new Marker(this.latCenterView, this.lngCenterView);
+          this.mapService.addMarker(marker);
+          this.zoom = 12;
         });
       });
     });
   }
-
-  constructor(
-    private mapService: MapService,
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
-  ) {
-    this.markers = this.mapService.getMarkers().pipe(share());
-  }
-
 
 
   markerDragEnd(marker: Marker, event: any) {
@@ -72,9 +74,7 @@ export class MapAdminComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latCenterView = position.coords.latitude;
         this.lngCenterView = position.coords.longitude;
-        let marker =  new Marker(this.latCenterView, this.lngCenterView);
-        this.mapService.addMarker(marker);
-        this.zoom = 12;
+
       });
     }
   }

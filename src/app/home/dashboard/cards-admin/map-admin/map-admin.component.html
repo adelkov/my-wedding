@@ -19,14 +19,12 @@
   <div *ngIf="markers | async; let markers; else loading">
     <div *ngFor="let marker of markers;">
       <agm-marker
-        *ngIf="marker.isVisible"
         [latitude]="marker.lat"
         [longitude]="marker.lng"
         [markerDraggable]="true"
         (dragEnd)="markerDragEnd(marker, $event)">
         <agm-info-window
           #infoWindow
-          [isOpen]="marker.isOpen"
         >
           <app-marker-info
             [marker]="marker"

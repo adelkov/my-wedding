@@ -7,30 +7,29 @@ import {Subject} from "rxjs/Subject";
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Observable, of} from 'rxjs';
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class WeddingService implements OnInit {
-
+  weddingName: String;
   wedding: Wedding;
-  public onUserUpdate = new Subject<User>();
-  public onDashboardUpdate = new Subject<Wedding>();
-  userid = "5b9a5b64aaff7f0015d7121a";
-
+  userid = "5b9a65320394b2347d0d115b";
+  public infoUpdate = new Subject<Object>();
+  public userUpdate = new Subject<String[]>();
 
   constructor(
     private http: HttpClient,
   ) {
+
   }
 
   ngOnInit() {
   }
 
   addNewWedding(wedding: Wedding) {
-    // POST new wedding to server
-
-    return this.http.post('https://my-wedding-backend.herokuapp.com/api/weddings/' + this.userid, wedding)
+    this.http.post(environment.HOST + '/api/weddings/' + this.userid, wedding)
       .subscribe(
-        (wedding) => console.log(wedding),
+        () => this.getUser(), // here emit an event to update user
         (error) => {
           console.log(error)
         }
@@ -38,21 +37,21 @@ export class WeddingService implements OnInit {
   }
 
 
-  getWedding(): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/todos/1')
-      .map((response: Response) => {
-          return response
+  getInfo() {
+    this.http.get('https://jsonplaceholder.typicode.com/todos/1')
+      .subscribe((resp) => {
+          this.infoUpdate.next(resp);
         }
       )
   }
 
-  getUserWithId() {
+  getUser() {
     /** GET User object from server */
-    return this.http.get<string[]>(
-      'https://my-wedding-backend.herokuapp.com/api/users/' + this.userid)
-      .map((response) => {
-          console.log(response["user"]["myWeddings"]);
-          return response["user"]["myWeddings"]
+    console.log("i get called");
+    this.http.get<string[]>(
+      environment.HOST + '/api/users/' + this.userid)
+      .subscribe((response) => {
+          this.userUpdate.next(response["user"]["myWeddings"])
         }
       )
   }

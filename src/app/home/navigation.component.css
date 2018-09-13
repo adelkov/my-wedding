@@ -43,10 +43,17 @@ mat-sidenav {
   padding: 10px;
 }
 
+a.sidenav-button {
+  width: 100%;
+  color:  #272727;
+  font-weight: bold;
+  font-size: 14pt;
+  text-align: left;
+}
+
 button.sidenav-button {
   width: 100%;
 }
-
 
 mat-toolbar {
   position: fixed;

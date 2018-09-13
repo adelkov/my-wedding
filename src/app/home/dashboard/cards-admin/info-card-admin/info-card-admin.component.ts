@@ -12,14 +12,16 @@ import {Observable} from "rxjs/Observable";
 })
 export class InfoCardAdminComponent implements OnInit {
 
-  currentWedding: Observable<any>;
+  currentWedding: Observable<Object>;
 
   constructor(
     private weddingService: WeddingService
   ) {
+    this.weddingService.getInfo();
+    this.weddingService.getUser();
   }
 
   ngOnInit() {
-    this.currentWedding = this.weddingService.getWedding().pipe(share());
+    this.currentWedding = this.weddingService.infoUpdate.asObservable();
   }
 }

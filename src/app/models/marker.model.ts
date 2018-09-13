@@ -1,6 +1,7 @@
 export class Marker {
   lat: Number;
   lng: Number;
+  name: String;
   isOpen: boolean;
 
   constructor(lat: Number, lng: Number) {

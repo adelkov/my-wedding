@@ -9,7 +9,28 @@
 
     <!--<div class="company-logo">My Wedding</div>-->
     <app-user-card></app-user-card>
+    <!--</mat-nav-list>-->
     <h2>My weddings:</h2>
+    <div *ngIf="myWeddings | async; let myWeddings; else loading">
+
+      <mat-nav-list>
+        <div *ngFor="let wedding of myWeddings">
+          <a
+            class="sidenav-button"
+            mat-raised-button
+            routerLink="/wedding/{{wedding}}"
+          >
+            {{ wedding }}
+          </a>
+          <br>
+        </div>
+        <button class="sidenav-button" mat-stroked-button color="alert" (click)="openWeddingDialog()">
+          +
+        </button>
+      </mat-nav-list>
+    </div>
+    <ng-template #loading>Loading User Data...</ng-template>
+    <h2>Guest weddings:</h2>
     <!--<mat-nav-list>-->
     <!--<a-->
     <!--class="sidenav-button"-->
@@ -18,28 +39,9 @@
     <!--routerLink="/wedding/{{wedding.name}}">-->
     <!--{{ wedding.name }}-->
     <!--</a>-->
-    <button class="sidenav-button" mat-stroked-button color="alert" (click)="openWeddingDialog()">
-      +
-    </button>
 
-    <!--</mat-nav-list>-->
-    <h2>Guest weddings:</h2>
-    <div *ngIf="myWeddings | async; let myWeddings; else loading">
 
-      <mat-nav-list>
-        <div *ngFor="let wedding of myWeddings">
-          <a
-            class="sidenav-button"
-            mat-stroked-button color="warn"
-            routerLink="/wedding/{{wedding.name}}"
-          >
-            {{ wedding.name }}
-          </a>
-          <br>
-        </div>
-      </mat-nav-list>
-    </div>
-    <ng-template #loading>Loading User Data...</ng-template>
+
 
   </mat-sidenav>
   <mat-sidenav-content>

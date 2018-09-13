@@ -19,9 +19,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   id: String;
   subURL: Subscription;
-  subUserUpdate: Subscription;
   myWeddings: Observable<String[]>;
-  guestWeddings: Wedding[];
   menuOpen = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -33,12 +31,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private weddingService: WeddingService,
     private breakpointObserver: BreakpointObserver,
-    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-    this.myWeddings = this.weddingService.getUserWithId().pipe(share());
+    this.myWeddings = this.weddingService.userUpdate.asObservable();
   }
 
   ngOnDestroy() {
@@ -49,17 +46,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.menuOpen = !this.menuOpen;
   }
 
-  updateDashBoard(wedding: Wedding) {
-    this.weddingService.onDashboardUpdate.next(wedding)
-  }
 
   openWeddingDialog() {
     const dialogRef = this.dialog.open(NewWeddingDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       console.log(result);
     });
   }
