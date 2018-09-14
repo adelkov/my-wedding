@@ -1,4 +1,4 @@
-<h1><i class="fas fa-map-marked-alt fa-2x cardIcon"></i>
+<h1><i class="fas fa-map-marked-alt fa-1x cardIcon"></i>
   Event locations</h1>
 
 <mat-form-field appearance="outline" class="form-group">
@@ -15,7 +15,6 @@
   [disableDefaultUI]="false"
   [zoomControl]="false"
   >
-
   <div *ngIf="markers | async; let markers; else loading">
     <div *ngFor="let marker of markers;">
       <agm-marker

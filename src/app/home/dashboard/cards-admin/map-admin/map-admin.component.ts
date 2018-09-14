@@ -66,7 +66,7 @@ export class MapAdminComponent implements OnInit {
     marker.lng = event.coords.lng;
     marker.lat = event.coords.lat;
     marker.isOpen = false;
-    this.mapService.update(marker);
+    this.mapService.updateMarker(marker);
   }
 
   private setCurrentPosition() {

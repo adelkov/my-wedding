@@ -1,4 +1,4 @@
-<h1><i class="fas fa-gift fa-2x cardIcon"></i>
+<h1><i class="fas fa-gift fa-1x cardIcon"></i>
   Present list</h1>
 <mat-selection-list #list (selectionChange)="onSelection($event, list.selectedOptions)">
   <mat-list-option *ngFor="let present of presentList" [selected]="present.isTaken" [value]="present" [disabled]="present.isTaken">

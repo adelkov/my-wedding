@@ -21,12 +21,25 @@ export class MapService {
   }
 
   updateMarker(marker) {
+    console.log(marker);
+    this.http.patch(environment.HOST + '/api/markers/' + this.weddingName, marker)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          this.getMarkers();
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
-  addMarker(marker) {
+  addMarker(marker: Marker) {
+    console.log(marker.id);
     this.http.post(environment.HOST + '/api/markers/' + this.weddingName, marker)
       .subscribe(
         (response) => {
+          console.log(response);
           this.getMarkers();
         },
         (error) => {
@@ -46,13 +59,5 @@ export class MapService {
           this.markerUpdate.next(response["markers"])
         }
       )
-  }
-
-  udpateMarker(marker: any) {
-
-  }
-
-  update(marker: Marker) {
-    // sent patch request to update
   }
 }

@@ -45,6 +45,7 @@ import {NewWeddingDialogComponent} from './home/new-wedding-dialog/new-wedding-d
 import {PresentListService} from "./services/present-list.service";
 import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-upload/present-upload.component";
 import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
+import { ChatComponent } from './home/dashboard/cards-admin/guestlist-admin/chat/chat.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlis
     NewWeddingDialogComponent,
     PresentListGuestComponent,
     PresentUploadComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

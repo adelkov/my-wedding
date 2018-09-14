@@ -3,6 +3,7 @@ export class Marker {
   lng: Number;
   name: String;
   isOpen: boolean;
+  id: string;
 
   constructor(lat: Number, lng: Number) {
     this.lat = lat;

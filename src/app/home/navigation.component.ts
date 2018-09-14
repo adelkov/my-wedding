@@ -67,4 +67,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
 
+  loadWedding() {
+    this.weddingService.getInfo();
+  }
 }

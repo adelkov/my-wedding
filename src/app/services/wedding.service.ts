@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
 
 @Injectable()
 export class WeddingService implements OnInit {
-  weddingName: String;
+  weddingName = "A new wedding";
   wedding: Wedding;
   userid = "5b9a65320394b2347d0d115b";
   public infoUpdate = new Subject<Object>();
@@ -19,11 +19,16 @@ export class WeddingService implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private route: ActivatedRoute
   ) {
-
+    this.route.params.subscribe((params) => {
+      console.log(params)
+    })
   }
 
   ngOnInit() {
+
+
   }
 
   addNewWedding(wedding: Wedding) {
@@ -38,9 +43,10 @@ export class WeddingService implements OnInit {
 
 
   getInfo() {
-    this.http.get('https://jsonplaceholder.typicode.com/todos/1')
+    this.http.get(environment.HOST + '/api/weddings/' + this.weddingName)
       .subscribe((resp) => {
-          this.infoUpdate.next(resp);
+          console.log(resp);
+          this.infoUpdate.next(resp[0]);
         }
       )
   }
