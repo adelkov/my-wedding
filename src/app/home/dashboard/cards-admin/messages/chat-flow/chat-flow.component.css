@@ -1,0 +1,21 @@
+
+
+#output-container {
+  position: relative;
+  min-height: 150px;
+  overflow: scroll;
+  width: 100%;
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+}
+
+#output {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+}

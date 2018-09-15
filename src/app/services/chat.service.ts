@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs/Rx';
 import {SocketService} from "./socket.service";
 
 @Injectable({
@@ -12,12 +12,9 @@ export class ChatService {
     this.messages = <Subject<any>>wsService
       .connect()
       .map((response: any): any => {
-        return response;
-      })
-  }
-
-  sendMsg(msg) {
-    this.messages.next(msg);
+          return response;
+        }
+      )
   }
 
 }

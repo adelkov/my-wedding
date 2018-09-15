@@ -10,6 +10,7 @@ import {NavigationComponent} from './home/navigation.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { environment } from '../environments/environment.prod';
+import {MatChipsModule} from '@angular/material/chips';
 
 import {
   MatToolbarModule,
@@ -46,6 +47,7 @@ import {PresentListService} from "./services/present-list.service";
 import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-upload/present-upload.component";
 import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
 import { MessagesComponent } from './home/dashboard/cards-admin/messages/messages.component';
+import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-flow/chat-flow.component';
 
 
 @NgModule({
@@ -64,6 +66,7 @@ import { MessagesComponent } from './home/dashboard/cards-admin/messages/message
     PresentListGuestComponent,
     PresentUploadComponent,
     MessagesComponent,
+    ChatFlowComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { MessagesComponent } from './home/dashboard/cards-admin/messages/message
     MatToolbarModule,
     MatDatepickerModule,
     MatButtonModule,
+    MatChipsModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

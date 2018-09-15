@@ -1,14 +1,15 @@
-
-
-#output-container {
-  position: relative;
-  min-height: 150px;
-  overflow: scroll;
-  width: 100%;
+mat-list-item {
+  height: 30px !important;
 }
 
-#output {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+
+.users-container {
+  overflow: scroll;
+  height: 200px;
+  border: 1px solid gainsboro;
+  border-radius: 6px;
+}
+
+i {
+  color: red;
 }
