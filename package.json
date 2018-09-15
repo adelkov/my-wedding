@@ -2,8 +2,8 @@
   "name": "my-wedding",
   "version": "0.0.0",
   "engines": {
-    "node": "10.10.0",
-    "npm": "3.10.10"
+    "node": "8.12.0",
+    "npm": "6.4.1"
   },
   "scripts": {
     "start": "http-server",
