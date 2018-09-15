@@ -33,7 +33,6 @@ export class MapAdminComponent implements OnInit {
   ngOnInit() {
     this.mapService.getMarkers();
     this.searchControl = new FormControl();
-    this.setCurrentPosition();
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -41,6 +40,7 @@ export class MapAdminComponent implements OnInit {
         types: ["address"]
       });
       autocomplete.addListener("place_changed", () => {
+        console.log("running marker action");
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -49,6 +49,8 @@ export class MapAdminComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+
+          this.setCurrentPosition()
 
           //set latitude, longitude and zoom
           this.latCenterView = place.geometry.location.lat();

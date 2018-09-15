@@ -4,7 +4,7 @@ export class Marker {
   name: String;
   icon: String;
   isOpen: boolean;
-  id: string;
+  _id: string;
 
   constructor(lat: Number, lng: Number) {
     this.lat = lat;

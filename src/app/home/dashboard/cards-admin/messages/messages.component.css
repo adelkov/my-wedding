@@ -10,6 +10,6 @@ mat-list-item {
   border-radius: 6px;
 }
 
-i {
-  color: red;
+.fa-user-circle {
+  color: #e15875;
 }

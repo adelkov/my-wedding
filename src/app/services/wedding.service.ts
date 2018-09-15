@@ -11,9 +11,9 @@ import {environment} from "../../environments/environment";
 
 @Injectable()
 export class WeddingService implements OnInit {
-  weddingName = "juliaandmark";
+  weddingName = "Julia%20&%20Mark%202018";
   wedding: Wedding;
-  userid = "5b9a65320394b2347d0d115b";
+  userid = "5b9d215de432210014157bba";
   public infoUpdate = new Subject<Object>();
   public userUpdate = new Subject<String[]>();
 

@@ -12,7 +12,7 @@ export class MapService {
   markerUpdate = new Subject<Marker[]>();
 
   // only for mocking purposes TODO: to be updated
-  weddingName = "juliaandmark";
+  weddingName = "Julia%20&%20Mark%202018";
 
 
   constructor(
@@ -20,7 +20,7 @@ export class MapService {
   ) {
   }
 
-  updateMarker(marker) {
+  updateMarker(marker: Marker) {
     console.log(marker);
     this.http.patch(environment.HOST + '/api/markers/' + this.weddingName, marker)
       .subscribe(
@@ -35,11 +35,9 @@ export class MapService {
   }
 
   addMarker(marker: Marker) {
-    console.log(marker.id);
     this.http.post(environment.HOST + '/api/markers/' + this.weddingName, marker)
       .subscribe(
         (response) => {
-          console.log(response);
           this.getMarkers();
         },
         (error) => {
@@ -48,14 +46,21 @@ export class MapService {
       )
   }
 
-  deleteMarker(marker) {
-
+  deleteMarker(marker: Marker) {
+    console.log(marker._id);
+    this.http.delete(environment.HOST + '/api/markers/' + this.weddingName + '/' + marker._id)
+      .subscribe((response) => {
+          console.log("ok delet done, getting.markers...");
+          this.getMarkers();
+        }
+      )
   }
 
 
   getMarkers() {
     this.http.get(environment.HOST + '/api/markers/' + this.weddingName)
       .subscribe((response: Marker[]) => {
+          console.log("current markers: " + response["markers"].length);
           this.markerUpdate.next(response["markers"])
         }
       )

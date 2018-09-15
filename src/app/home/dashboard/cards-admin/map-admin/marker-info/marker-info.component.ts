@@ -27,6 +27,7 @@ export class MarkerInfoComponent implements OnInit {
   }
 
   deleteThisMarker() {
+    console.log("delete me please;");
     this.mapService.deleteMarker(this.marker);
   }
 
