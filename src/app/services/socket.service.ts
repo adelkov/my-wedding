@@ -21,12 +21,11 @@ export class SocketService {
   // the observable: listens to server-socket and forwards the message to its subscribers
   // as a subject it can be used via .next() to send message to server-socket
   //              it can be used via .subscribe() to get messages from server
-  connect(): Rx.Subject<MessageEvent> {
+  messagesConnect(): Rx.Subject<MessageEvent> {
     this.socket = io(environment.HOST);
 
     let observable = new Observable(observer => {
       this.socket.on('message', (data) => {
-        console.log("Received message from Websocket Server");
         observer.next(data);
       });
       // return () => {
@@ -37,6 +36,27 @@ export class SocketService {
     let observer = {
       next: (data: Object) => {
         this.socket.emit('message', JSON.stringify(data));
+      },
+    };
+
+    return Rx.Subject.create(observer, observable);
+  }
+
+  typingConnect(): Rx.Subject<MessageEvent> {
+    this.socket = io(environment.HOST);
+
+    let observable = new Observable(observer => {
+      this.socket.on('typing', (data) => {
+        observer.next(data);
+      });
+      // return () => {
+      //   this.socket.disconnect();
+      // }
+    });
+
+    let observer = {
+      next: (data: Object) => {
+        this.socket.emit('typing', JSON.stringify(data));
       },
     };
 

@@ -10,7 +10,7 @@ export class ChatService {
 
   constructor(private wsService: SocketService) {
     this.messages = <Subject<any>>wsService
-      .connect()
+      .messagesConnect()
       .map((response: any): any => {
           return response;
         }

@@ -1,12 +1,9 @@
 import {Injectable, OnInit} from '@angular/core';
 import {Wedding} from "../models/wedding.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {User} from "../models/user.model";
 import "rxjs-compat/add/operator/map";
 import {Subject} from "rxjs/Subject";
-import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Params} from "@angular/router";
-import {Observable, of} from 'rxjs';
 import {environment} from "../../environments/environment";
 
 @Injectable()
@@ -34,7 +31,7 @@ export class WeddingService implements OnInit {
   addNewWedding(wedding: Wedding) {
     this.http.post(environment.HOST + '/api/weddings/' + this.userid, wedding)
       .subscribe(
-        () => this.getUser(), // here emit an event to update user
+        () => this.getUser(),
         (error) => {
           console.log(error)
         }
