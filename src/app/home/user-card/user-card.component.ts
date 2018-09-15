@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserCardComponent implements OnInit {
 
+  userID = 12;
   constructor() { }
 
   ngOnInit() {
