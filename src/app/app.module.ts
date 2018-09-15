@@ -33,7 +33,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {WeddingService} from "./services/wedding.service";
 import {UserCardComponent} from './home/user-card/user-card.component';
 
-import {FlexLayoutModule} from "@angular/flex-layout";
+// import {FlexLayoutModule} from "@angular/flex-layout";
 import {AgmDirectionModule} from 'agm-direction';
 import {DashboardComponent} from "./home/dashboard/dashboard.component";
 import {GuestlistAdminComponent} from "./home/dashboard/cards-admin/guestlist-admin/guestlist-admin.component";
@@ -95,7 +95,7 @@ import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-fl
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     AgmCoreModule.forRoot({
       apiKey: environment.agm_api,
       libraries: ["places"]
