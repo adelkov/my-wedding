@@ -9,9 +9,9 @@ import {GuestlistService} from "../../../../../services/guestlist.service";
   styleUrls: ['./guest-detail.component.css']
 })
 export class GuestDetailComponent implements OnInit, OnDestroy {
-  private showMe = false;
-  private eventsSubscription: Subscription;
-  private currentGuest = {
+  showMe = false;
+  eventsSubscription: Subscription;
+  currentGuest = {
     name: 'test',
     rsvp: 'test',
     guests: 2,
