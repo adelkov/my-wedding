@@ -1,0 +1,10 @@
+<div id="output-container">
+  <div id="output"></div>
+</div>
+<form class="message">
+  <mat-form-field class="example-full-width">
+    <input matInput #message maxlength="256" placeholder="Message" (keydown.enter)="sendMessage($event)">
+    <mat-hint align="start"><strong>Don't disclose personal info</strong></mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+</form>

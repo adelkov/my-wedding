@@ -16,7 +16,6 @@ export class InfoCardAdminComponent implements OnInit {
   currentWedding: Observable<Object>;
 
   constructor(
-    private chat: ChatService,
     private weddingService: WeddingService
   ) {
     this.weddingService.getInfo();
@@ -25,15 +24,8 @@ export class InfoCardAdminComponent implements OnInit {
 
   ngOnInit() {
     this.currentWedding = this.weddingService.infoUpdate.asObservable();
-    this.chat.messages.subscribe(msg => {
-      let output = document.getElementById("messageOutput").innerHTML +=
-        `<p> ${msg}<p><hr>`
-    })
+
   }
 
-  sendMessage() {
-    this.chat.sendMsg("Test Message From info to server");
-  }
 }
-
 
