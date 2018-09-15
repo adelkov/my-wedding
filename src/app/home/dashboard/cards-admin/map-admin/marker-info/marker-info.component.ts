@@ -11,19 +11,29 @@ import {MapService} from "../../../../../services/map.service";
 export class MarkerInfoComponent implements OnInit {
   @Input() marker: Marker;
   formOpen: boolean;
-  markerSchemas: { label: string, icon: string }[];
+  markerSchemas= [
+    { label: "Chappel", icon: "fas fa-church" },
+    { label: "Dinner", icon: "fas fa-utensils" },
+    { label: "Party", icon: "fas fa-music" },
+    { label: "Parking", icon: "fas fa-parking" },
+    ];
 
   constructor(private mapService: MapService) {
-    this.formOpen = true;
+
   }
 
   ngOnInit() {
+    this.formOpen = this.marker.name === "";
   }
 
   deleteThisMarker() {
     this.mapService.deleteMarker(this.marker);
   }
 
-  chosenSchema(marker: { label: string; icon: string }) {
+  chosenSchema(markerSchema: { label: string; icon: string }) {
+    this.marker.name = markerSchema.label;
+    this.marker.icon = markerSchema.icon;
+    this.mapService.updateMarker(this.marker);
+    this.formOpen = false;
   }
 }

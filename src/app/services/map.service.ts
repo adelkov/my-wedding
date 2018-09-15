@@ -12,7 +12,7 @@ export class MapService {
   markerUpdate = new Subject<Marker[]>();
 
   // only for mocking purposes TODO: to be updated
-  weddingName = "wed";
+  weddingName = "juliaandmark";
 
 
   constructor(

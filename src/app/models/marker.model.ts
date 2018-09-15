@@ -2,6 +2,7 @@ export class Marker {
   lat: Number;
   lng: Number;
   name: String;
+  icon: String;
   isOpen: boolean;
   id: string;
 
@@ -9,6 +10,8 @@ export class Marker {
     this.lat = lat;
     this.lng = lng;
     this.isOpen = true;
+    this.name = "";
+    this.icon = "";
   }
 }
 
