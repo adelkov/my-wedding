@@ -48,6 +48,7 @@ import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-uploa
 import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
 import { MessagesComponent } from './home/dashboard/cards-admin/messages/messages.component';
 import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-flow/chat-flow.component';
+import {InfoCardComponent} from "./home/dashboard/cards-guest/infocard/info-card.component";
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-fl
     PresentUploadComponent,
     MessagesComponent,
     ChatFlowComponent,
+    InfoCardComponent
   ],
   imports: [
     BrowserModule,
