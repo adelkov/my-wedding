@@ -1,14 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import url(https://fonts.googleapis.com/css?family=Pacifico|Poiret+One);
 @import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great|Kranky);
+@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans);
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 html, body {
   height: 100%;
 }
 
 * {
-  font-family: 'Poiret One', cursive;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 10pt;
 }
 
 body {

@@ -4,19 +4,16 @@
     <app-info-card-admin></app-info-card-admin>
   </mat-card>
   <mat-card id="guest-list">
-    <!--<div class="container"-->
-         <!--fxLayout="row"-->
-         <!--fxLayout.xs="column"-->
-         <!--fxLayoutWrap-->
-         <!--fxLayoutGap="0.5%"-->
-         <!--fxLayoutAlign="center">-->
-      <!--<div fxFlex="50%">-->
-        <app-guestlist-admin></app-guestlist-admin>
-      <!--</div>-->
-      <!--<div fxFlex="50%">-->
-        <app-guest-detail></app-guest-detail>
-      <!--</div>-->
-    <!--</div>-->
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+          <app-guestlist-admin></app-guestlist-admin>
+        </div>
+        <div class="col col-lg-6">
+          <app-guest-detail></app-guest-detail>
+        </div>
+      </div>
+    </div>
   </mat-card>
   <mat-card>
     <app-messages></app-messages>
