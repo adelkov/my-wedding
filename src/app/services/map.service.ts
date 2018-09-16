@@ -1,24 +1,25 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import {Marker} from "../models/marker.model";
 import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/index";
+import {Observable, Subscription} from "rxjs/index";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {WeddingService} from "./wedding.service";
+import {ActivatedRoute, ActivationEnd, NavigationEnd, Router} from "@angular/router";
+import {filter} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
   markerUpdate = new Subject<Marker[]>();
-
-  // only for mocking purposes TODO: to be updated
-  weddingName = "Julia%20&%20Mark%202018";
-
+  weddingName: String;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {
   }
+
 
   updateMarker(marker: Marker) {
     console.log(marker);
@@ -47,10 +48,8 @@ export class MapService {
   }
 
   deleteMarker(marker: Marker) {
-    console.log(marker._id);
     this.http.delete(environment.HOST + '/api/markers/' + this.weddingName + '/' + marker._id)
       .subscribe((response) => {
-          console.log("ok delet done, getting.markers...");
           this.getMarkers();
         }
       )
@@ -60,7 +59,6 @@ export class MapService {
   getMarkers() {
     this.http.get(environment.HOST + '/api/markers/' + this.weddingName)
       .subscribe((response: Marker[]) => {
-          console.log("current markers: " + response["markers"].length);
           this.markerUpdate.next(response["markers"])
         }
       )

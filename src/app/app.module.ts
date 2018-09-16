@@ -49,6 +49,7 @@ import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlis
 import { MessagesComponent } from './home/dashboard/cards-admin/messages/messages.component';
 import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-flow/chat-flow.component';
 import {InfoCardComponent} from "./home/dashboard/cards-guest/infocard/info-card.component";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({

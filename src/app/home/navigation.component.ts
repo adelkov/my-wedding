@@ -6,6 +6,8 @@ import {Subscription} from "rxjs/Subscription";
 import {WeddingService} from "../services/wedding.service";
 import {MatDialog} from "@angular/material";
 import {NewWeddingDialogComponent} from "./new-wedding-dialog/new-wedding-dialog.component";
+import {MapService} from "../services/map.service";
+import {ActivationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -15,7 +17,6 @@ import {NewWeddingDialogComponent} from "./new-wedding-dialog/new-wedding-dialog
 export class NavigationComponent implements OnInit, OnDestroy {
 
   id: String;
-  subURL: Subscription;
   myWeddings: Observable<String[]>;
   menuOpen = false;
 
@@ -28,7 +29,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private weddingService: WeddingService,
     private breakpointObserver: BreakpointObserver,
+    private router: Router
   ) {
+
   }
 
   ngOnInit() {
@@ -37,7 +40,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subURL.unsubscribe();
   }
 
   toggleMenuIcon() {
@@ -62,10 +64,5 @@ export class NavigationComponent implements OnInit, OnDestroy {
         element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
       }, wait)
     }
-  }
-
-
-  loadWedding() {
-    this.weddingService.getInfo();
   }
 }

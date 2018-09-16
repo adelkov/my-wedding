@@ -6,6 +6,8 @@ import {Observable} from "rxjs/Observable";
 import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import {Subscription} from "rxjs";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-map-admin',
@@ -18,11 +20,13 @@ export class MapAdminComponent implements OnInit {
   lngCenterView: number = 7.815982;
   zoom: number = 8;
   public searchControl: FormControl;
+  paramSub: Subscription;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
   constructor(
+    private route: ActivatedRoute,
     private mapService: MapService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
@@ -31,7 +35,15 @@ export class MapAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mapService.getMarkers();
+
+    this.paramSub = this.route.params.subscribe(
+      (params: Params) => {
+        this.mapService.weddingName = params.weddingName;
+        this.mapService.getMarkers();
+      }
+    );
+
+    // this.mapService.getMarkers();
     this.searchControl = new FormControl();
 
     //load Places Autocomplete

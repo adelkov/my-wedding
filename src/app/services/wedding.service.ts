@@ -3,12 +3,12 @@ import {Wedding} from "../models/wedding.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import "rxjs-compat/add/operator/map";
 import {Subject} from "rxjs/Subject";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, ActivationEnd, Params, Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 
 @Injectable()
 export class WeddingService implements OnInit {
-  weddingName = "Julia%20&%20Mark%202018";
+  weddingName: String;
   wedding: Wedding;
   userid = "5b9d215de432210014157bba";
   public infoUpdate = new Subject<Object>();
@@ -16,15 +16,13 @@ export class WeddingService implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
   ) {
-    this.route.params.subscribe((params) => {
-      console.log(params)
-    })
+
   }
 
   ngOnInit() {
-
 
   }
 
@@ -42,7 +40,6 @@ export class WeddingService implements OnInit {
   getInfo() {
     this.http.get(environment.HOST + '/api/weddings/' + this.weddingName)
       .subscribe((resp) => {
-          console.log(resp);
           this.infoUpdate.next(resp[0]);
         }
       )
@@ -50,7 +47,6 @@ export class WeddingService implements OnInit {
 
   getUser() {
     /** GET User object from server */
-    console.log("i get called");
     this.http.get<string[]>(
       environment.HOST + '/api/users/' + this.userid)
       .subscribe((response) => {
