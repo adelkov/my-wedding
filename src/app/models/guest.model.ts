@@ -14,6 +14,5 @@ export class Guest {
     this.guests = guests;
     this.online = false;
     this.rsvp = "pending";
-    this.id="";
   }
 }
