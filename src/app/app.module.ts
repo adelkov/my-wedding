@@ -50,6 +50,7 @@ import { MessagesComponent } from './home/dashboard/cards-admin/messages/message
 import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-flow/chat-flow.component';
 import {InfoCardComponent} from "./home/dashboard/cards-guest/infocard/info-card.component";
 import {RouterModule} from "@angular/router";
+import { InviteGuestComponent } from './home/dashboard/cards-admin/guestlist-admin/invite-guest/invite-guest.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import {RouterModule} from "@angular/router";
     PresentUploadComponent,
     MessagesComponent,
     ChatFlowComponent,
-    InfoCardComponent
+    InfoCardComponent,
+    InviteGuestComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,8 @@ import {RouterModule} from "@angular/router";
     ReactiveFormsModule
   ],
   entryComponents: [
-    NewWeddingDialogComponent
+    NewWeddingDialogComponent,
+    InviteGuestComponent
   ],
   providers: [
     GuestlistService,

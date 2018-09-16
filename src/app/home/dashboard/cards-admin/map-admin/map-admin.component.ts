@@ -88,7 +88,6 @@ export class MapAdminComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latCenterView = position.coords.latitude;
         this.lngCenterView = position.coords.longitude;
-
       });
     }
   }

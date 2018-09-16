@@ -15,3 +15,9 @@ table, mat-paginator, mat-form-field {
 map-card.mat-card {
   padding: 0px;
 }
+
+
+button {
+  width: 100%;
+  background-color: #cae3e8;
+}

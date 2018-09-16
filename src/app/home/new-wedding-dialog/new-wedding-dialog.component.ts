@@ -11,7 +11,6 @@ import {WeddingService} from "../../services/wedding.service";
 })
 export class NewWeddingDialogComponent implements OnInit {
   @ViewChild('f') newWeddingForm: NgForm;
-  newWedding = new Wedding('', '', '', '');
 
   constructor(
     private weddingService: WeddingService,
@@ -22,13 +21,13 @@ export class NewWeddingDialogComponent implements OnInit {
   }
 
   onSubmit(){
-
-    console.log("submission");
-    this.newWedding.name = this.newWeddingForm.value.name;
-    this.newWedding.date = this.newWeddingForm.value.date;
-    this.newWedding.place = this.newWeddingForm.value.name;
-    this.newWedding.descr = this.newWeddingForm.value.description;
-    this.weddingService.addNewWedding( this.newWedding);
+    let newWedding = new Wedding(
+      this.newWeddingForm.value.name,
+      this.newWeddingForm.value.date,
+      this.newWeddingForm.value.name,
+      this.newWeddingForm.value.description
+    );
+    this.weddingService.addNewWedding(newWedding);
     this.dialogRef.close();
   }
 }

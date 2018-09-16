@@ -1,8 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subject} from "rxjs/Subject";
 import {Guest} from "../../../../models/guest.model";
 import {GuestlistService} from "../../../../services/guestlist.service";
+import {NewWeddingDialogComponent} from "../../../new-wedding-dialog/new-wedding-dialog.component";
+import {InviteGuestComponent} from "./invite-guest/invite-guest.component";
 
 
 /**
@@ -17,13 +19,15 @@ export class GuestlistAdminComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'rsvp', 'guests'];
   dataSource: MatTableDataSource<Guest>;
   guests: Guest[];
-  guestChosen = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private guestService: GuestlistService) {
-    this.guests =  this.guestService.getGuests();
+  constructor(
+    public dialog: MatDialog,
+    private guestService: GuestlistService
+  ) {
+    this.guests =  [];
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.guests);
@@ -44,5 +48,10 @@ export class GuestlistAdminComponent implements OnInit {
   onClickRow(row) {
     this.guestService.guestDisplayed = true;
     this.guestService.guestChosen.next(row)
+  }
+
+
+  openInvitationDialog() {
+    this.dialog.open(InviteGuestComponent);
   }
 }

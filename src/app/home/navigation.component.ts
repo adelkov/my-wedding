@@ -6,8 +6,7 @@ import {Subscription} from "rxjs/Subscription";
 import {WeddingService} from "../services/wedding.service";
 import {MatDialog} from "@angular/material";
 import {NewWeddingDialogComponent} from "./new-wedding-dialog/new-wedding-dialog.component";
-import {MapService} from "../services/map.service";
-import {ActivationEnd, Router} from "@angular/router";
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -48,12 +47,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
 
   openWeddingDialog() {
-    const dialogRef = this.dialog.open(NewWeddingDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    this.dialog.open(NewWeddingDialogComponent);
   }
 
   goTo(location: string): void {

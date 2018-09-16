@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Add new wedding!</h2>
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" #f="ngForm">
+    <mat-form-field>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        ngModel
+        name="name"
+        required
+        matInput
+        placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field>
+    <input
+      type="number"
+      id="guests"
+      class="form-control"
+      ngModel
+      name="guests"
+      required
+      matInput
+      placeholder="Extra guests">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        type="email"
+        email
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        required
+        matInput
+        placeholder="e-mail">
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!f.valid"
+    >Invite guest!</button>
+  </form>
+</mat-dialog-content>
