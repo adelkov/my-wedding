@@ -9,12 +9,18 @@
           <b>{{message.name+": "}} &#160; </b> {{message.message}}
         </mat-chip>
       </div>
+      <div>{{ feedback }}</div>
     </mat-chip-list>
   </div>
 </div>
 <form class="message">
   <mat-form-field class="example-full-width">
-    <input matInput #message maxlength="256" placeholder="Message" (keydown.enter)="sendMessage($event)" utocomplete="off">
+    <input
+      matInput #message maxlength="256"
+      placeholder="Message"
+      (keydown)="sendFeedback()"
+      (keydown.enter)="sendMessage($event)"
+      utocomplete="off">
     <mat-hint align="start"><strong>Don't disclose personal info</strong></mat-hint>
     <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
   </mat-form-field>

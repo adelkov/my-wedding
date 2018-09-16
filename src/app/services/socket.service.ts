@@ -42,11 +42,11 @@ export class SocketService {
     return Rx.Subject.create(observer, observable);
   }
 
-  typingConnect(): Rx.Subject<MessageEvent> {
+  feedbacksconnect(): Rx.Subject<MessageEvent> {
     this.socket = io(environment.HOST);
 
     let observable = new Observable(observer => {
-      this.socket.on('typing', (data) => {
+      this.socket.on('feedback', (data) => {
         observer.next(data);
       });
       // return () => {
@@ -56,10 +56,12 @@ export class SocketService {
 
     let observer = {
       next: (data: Object) => {
-        this.socket.emit('typing', JSON.stringify(data));
+        this.socket.emit('feedback', JSON.stringify(data));
       },
     };
 
     return Rx.Subject.create(observer, observable);
   }
+
+
 }
