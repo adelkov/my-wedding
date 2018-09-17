@@ -6,7 +6,6 @@ import { environment } from '../../environments/environment';
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +13,7 @@ export class SocketService {
   private socket;
 
   constructor() {
+    this.socket = io(environment.HOST);
   }
 
   // returns a subject created from an observable and an observer:
@@ -22,15 +22,11 @@ export class SocketService {
   // as a subject it can be used via .next() to send message to server-socket
   //              it can be used via .subscribe() to get messages from server
   messagesConnect(): Rx.Subject<MessageEvent> {
-    this.socket = io(environment.HOST);
 
     let observable = new Observable(observer => {
       this.socket.on('message', (data) => {
         observer.next(data);
       });
-      // return () => {
-      //   this.socket.disconnect();
-      // }
     });
 
     let observer = {
@@ -43,15 +39,11 @@ export class SocketService {
   }
 
   feedbacksconnect(): Rx.Subject<MessageEvent> {
-    this.socket = io(environment.HOST);
 
     let observable = new Observable(observer => {
       this.socket.on('feedback', (data) => {
         observer.next(data);
       });
-      // return () => {
-      //   this.socket.disconnect();
-      // }
     });
 
     let observer = {
