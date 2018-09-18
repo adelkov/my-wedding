@@ -1,3 +1,7 @@
-<p>
-  Info card works!
-</p>
+<div *ngIf="currentWedding | async; let currentWedding; else loading">
+
+<h1><i class="fas fa-info-circle fa-1x"></i>
+{{ currentWedding.name}} <br>
+</h1>
+</div>
+<ng-template #loading>Loading User Data...</ng-template>

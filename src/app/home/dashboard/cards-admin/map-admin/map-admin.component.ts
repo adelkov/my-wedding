@@ -1,52 +1,94 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Coordinate} from "./coordinate.model";
-import {MapTypeStyle} from "@agm/core";
-import {Marker} from "./marker.model";
-import {MapService} from "./map.service";
-import {Subscription} from "rxjs/Subscription";
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Marker} from "../../../../models/marker.model";
+import {MapService} from "../../../../services/map.service";
+import {share} from "rxjs/operators";
+import {Observable} from "rxjs/Observable";
+import { FormControl } from '@angular/forms';
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
+import {Subscription} from "rxjs";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-map-admin',
   templateUrl: './map-admin.component.html',
   styleUrls: ['./map-admin.component.css']
 })
-export class MapAdminComponent {
-// google maps zoom level
-  markers: Marker[];
-  markersUpdate: Subscription;
+export class MapAdminComponent implements OnInit {
+  markers: Observable<Marker[]>;
   latCenterView: number = 51.673858;
   lngCenterView: number = 7.815982;
   zoom: number = 8;
+  public searchControl: FormControl;
+  paramSub: Subscription;
 
-  constructor(private mapService: MapService) {
-    this.markers = this.mapService.getMarkers();
-    this.markersUpdate = this.mapService.onMarkersUpdate.subscribe((markers) => this.markers = markers)
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
+  constructor(
+    private route: ActivatedRoute,
+    private mapService: MapService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) {
+    this.markers = this.mapService.markerUpdate.asObservable();
   }
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  ngOnInit() {
+
+    this.paramSub = this.route.params.subscribe(
+      (params: Params) => {
+        this.mapService.weddingName = params.weddingName;
+        this.mapService.getMarkers();
+      }
+    );
+
+    // this.mapService.getMarkers();
+    this.searchControl = new FormControl();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        console.log("running marker action");
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          this.setCurrentPosition()
+
+          //set latitude, longitude and zoom
+          this.latCenterView = place.geometry.location.lat();
+          this.lngCenterView = place.geometry.location.lng();
+          let marker =  new Marker(this.latCenterView, this.lngCenterView);
+          this.mapService.addMarker(marker);
+          this.zoom = 12;
+        });
+      });
+    });
   }
 
-  mapClicked(event) {
-    let marker = new Marker(event.coords.lat, event.coords.lng, 'new location', true, true)
-    this.markers.push(marker);
-    for (let m of this.markers){
-      m.isOpen = m.label === marker.label;
-    }
-    this.mapService.saveMarkers(this.markers);
+
+  markerDragEnd(marker: Marker, event: any) {
+    marker.lng = event.coords.lng;
+    marker.lat = event.coords.lat;
+    marker.isOpen = false;
+    this.mapService.updateMarker(marker);
   }
 
-  markerDragEnd(m: Marker, $event: MouseEvent) {
-    this.mapService.saveMarkers(this.markers);
-  }
-
-  onLocationClick(m: Marker) {
-    this.latCenterView = m.lat;
-    this.lngCenterView = m.lng;
-    for (let marker of this.markers){
-      marker.isOpen = marker.label === m.label;
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latCenterView = position.coords.latitude;
+        this.lngCenterView = position.coords.longitude;
+      });
     }
   }
 }
-
-

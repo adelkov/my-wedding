@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Inject, OnInit, Output, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {Wedding} from "../wedding.model";
+import {Wedding} from "../../models/wedding.model";
 import {NgForm} from "@angular/forms";
-import {WeddingService} from "../wedding.service";
+import {WeddingService} from "../../services/wedding.service";
 
 @Component({
   selector: 'app-new-wedding-dialog',
@@ -11,7 +11,6 @@ import {WeddingService} from "../wedding.service";
 })
 export class NewWeddingDialogComponent implements OnInit {
   @ViewChild('f') newWeddingForm: NgForm;
-  newWedding = new Wedding('', '', '', '');
 
   constructor(
     private weddingService: WeddingService,
@@ -22,14 +21,13 @@ export class NewWeddingDialogComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("submission");
-    this.newWedding.name = this.newWeddingForm.value.name;
-    this.newWedding.date = this.newWeddingForm.value.date;
-    this.newWedding.place = this.newWeddingForm.value.name;
-    this.newWedding.description = this.newWeddingForm.value.description;
-    this.weddingService.addNewWedding("juli@ema.il", this.newWedding);
-    console.log("wedding added");
+    let newWedding = new Wedding(
+      this.newWeddingForm.value.name,
+      this.newWeddingForm.value.date,
+      this.newWeddingForm.value.name,
+      this.newWeddingForm.value.description
+    );
+    this.weddingService.addNewWedding(newWedding);
     this.dialogRef.close();
   }
-
 }

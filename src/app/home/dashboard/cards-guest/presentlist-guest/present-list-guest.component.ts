@@ -11,18 +11,17 @@ import {AuthService} from "../../../../auth/auth.service";
 })
 export class PresentListGuestComponent implements OnInit, OnDestroy{
   presentList: Present[] = [];
-
   private presentListSub: Subscription;
+
   constructor(
-    private presentListGuestService: PresentListService,
-    private authService: AuthService
-  ) {}
+    public presentListService: PresentListService,
+    private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.authReady.subscribe((next) => {
-      this.presentListGuestService.getPresentList();
+      this.presentListService.getPresentList();
     });
-    this.presentListSub = this.presentListGuestService.getPresentListUpdateListener()
+    this.presentListSub = this.presentListService.getPresentListUpdateListener()
       .subscribe((presents: Present[]) => {
         this.presentList = presents;
       });
@@ -33,7 +32,7 @@ export class PresentListGuestComponent implements OnInit, OnDestroy{
   }
 
   onSelection(event, item){
-    this.presentListGuestService.presentSelected(event.option.value.id);
+    this.presentListService.presentSelected(event.option.value.id);
   }
 
 

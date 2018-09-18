@@ -4,16 +4,15 @@ import {NavigationComponent} from "./home/navigation.component";
 import {HomeComponent} from "./landing/home.component";
 import {CallbackComponent} from "./callback.component";
 import {AuthGuard} from "./auth/auth.guard";
+import {DashboardComponent} from "./home/dashboard/dashboard.component";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'callback', component: CallbackComponent},
   {
-    path: 'wedding/:id',
-    component: NavigationComponent,
-    /*canActivate: [
-      AuthGuard
-    ]*/
+    path: 'wedding', component: NavigationComponent, children: [
+      {path: ':weddingName', component: DashboardComponent}
+    ]
   },
   {path: '**', redirectTo: ''} // todo: /not-found page
 ]

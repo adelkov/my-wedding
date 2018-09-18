@@ -8,9 +8,16 @@ table, mat-paginator, mat-form-field {
 }
 
 .mat-row:hover {
-  background-color: #99acc2;
+  background-color: #cae3e8;
+  cursor: pointer;
 }
 
 map-card.mat-card {
   padding: 0px;
+}
+
+
+button {
+  width: 100%;
+  background-color: #cae3e8;
 }

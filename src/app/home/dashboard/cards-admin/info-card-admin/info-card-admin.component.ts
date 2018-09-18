@@ -1,7 +1,11 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {Wedding} from "../../../wedding.model";
-import {WeddingService} from "../../../wedding.service";
+import {Wedding} from "../../../../models/wedding.model";
+import {WeddingService} from "../../../../services/wedding.service";
 import {Subscription} from "rxjs/Subscription";
+import {share} from "rxjs/operators";
+import {Observable} from "rxjs/Observable";
+import {ChatService} from "../../../../services/chat.service";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-info-card-admin',
@@ -10,15 +14,26 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class InfoCardAdminComponent implements OnInit {
 
-  private subDashboardUpdate: Subscription;
-  currentWedding: Wedding;
+  currentWedding: Observable<Object>;
+  paramsSub: Subscription;
 
-  constructor(private weddingService: WeddingService) { }
+  constructor(
+    private weddingService: WeddingService,
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit() {
-    this.subDashboardUpdate = this.weddingService.onDashboardUpdate
-      .subscribe(
-        (wedding) => this.currentWedding = wedding
-      )
+    this.currentWedding = this.weddingService.infoUpdate.asObservable();
+
+    this.weddingService.weddingName = this.route.snapshot.params.weddingName;
+
+    this.paramsSub = this.route.params.subscribe(
+      (params: Params) => {
+        this.weddingService.weddingName = params.weddingName;
+        this.weddingService.getInfo();
+      }
+    );
   }
 }
+

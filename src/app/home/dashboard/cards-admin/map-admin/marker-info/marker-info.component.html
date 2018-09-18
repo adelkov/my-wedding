@@ -1,22 +1,15 @@
-<button
-  mat-stroked-button color="accent"
-  (click)="deleteThisMarker()"
->Delete pin
-</button>
-<form class="example-form" *ngIf="formOpen">
-  <mat-form-field class="example-full-width">
-    <input
-      #newName
-      value=""
-      matInput
-      placeholder="Event location name"
-      (keyup)="saveName($event)"
-    >
-  </mat-form-field>
-</form>
-<br>
-<button
-  *ngIf="!formOpen"
-  (click)="formOpen = true"
-  mat-stroked-button color="warn"
->Rename pin</button>
+<div *ngIf="formOpen">
+  What is this location? <br>
+  <button
+    mat-raised-button color="primary"
+    *ngFor="let markerSchema of markerSchemas"
+    (click)="chosenSchema(markerSchema)"
+  >{{ markerSchema.label }}
+  </button>
+</div>
+<div *ngIf="!formOpen">
+  <h2><i class="{{marker.icon+' fa-1x'}}"></i> {{ marker.name }}</h2>
+  <a mat-mini-fab color="warn"  (click)="deleteThisMarker()">
+    <i class="far fa-trash-alt"></i></a>
+</div>
+

@@ -1,0 +1,17 @@
+<h2><i class="far fa-comments fa-1x"></i> Messages</h2>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+      <div class="users-container">
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let guest of guests" >
+            <i class="fas fa-user-circle"></i> &#160;{{guest.name}}
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+    <div class="col col-lg-10">
+      <app-chat-flow></app-chat-flow>
+    </div>
+  </div>
+</div>

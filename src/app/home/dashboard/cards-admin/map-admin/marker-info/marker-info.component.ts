@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Marker} from "../marker.model";
-import {MapService} from "../map.service";
+import {Marker} from "../../../../../models/marker.model";
+import {MapService} from "../../../../../services/map.service";
 
 @Component({
   selector: 'app-marker-info',
@@ -10,21 +10,31 @@ import {MapService} from "../map.service";
 
 export class MarkerInfoComponent implements OnInit {
   @Input() marker: Marker;
-  @ViewChild('newName') newName;
-  formOpen = false;
-  constructor(private mapService: MapService) { }
+  formOpen: boolean;
+  markerSchemas= [
+    { label: "Chappel", icon: "fas fa-church" },
+    { label: "Dinner", icon: "fas fa-utensils" },
+    { label: "Party", icon: "fas fa-music" },
+    { label: "Parking", icon: "fas fa-parking" },
+    ];
+
+  constructor(private mapService: MapService) {
+
+  }
 
   ngOnInit() {
+    this.formOpen = this.marker.name === "";
   }
 
   deleteThisMarker() {
+    console.log("delete me please;");
     this.mapService.deleteMarker(this.marker);
   }
 
-  saveName(event) {
-    if (event.key === "Enter") {
-      this.marker.label = this.newName.nativeElement.value;
-      this.formOpen = false;
-    }
+  chosenSchema(markerSchema: { label: string; icon: string }) {
+    this.marker.name = markerSchema.label;
+    this.marker.icon = markerSchema.icon;
+    this.mapService.updateMarker(this.marker);
+    this.formOpen = false;
   }
 }

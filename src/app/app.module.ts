@@ -1,14 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
-import { ReactiveFormsModule } from "@angular/forms";
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
-import { AppComponent } from './app.component';
-import { HomeComponent } from './landing/home.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationComponent } from './home/navigation.component';
-import { LayoutModule } from '@angular/cdk/layout';
+import {AppComponent} from './app.component';
+import {HomeComponent} from './landing/home.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NavigationComponent} from './home/navigation.component';
+import {LayoutModule} from '@angular/cdk/layout';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { environment } from '../environments/environment.prod';
+import {MatChipsModule} from '@angular/material/chips';
 
 import {
   MatToolbarModule,
@@ -28,24 +30,29 @@ import {
 } from '@angular/material';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import {WeddingService} from "./home/wedding.service";
-import { UserCardComponent } from './home/user-card/user-card.component';
+import {WeddingService} from "./services/wedding.service";
+import {UserCardComponent} from './home/user-card/user-card.component';
 
-import {FlexLayoutModule} from "@angular/flex-layout";
-import { AgmDirectionModule } from 'agm-direction';
+// import {FlexLayoutModule} from "@angular/flex-layout";
+import {AgmDirectionModule} from 'agm-direction';
 import {DashboardComponent} from "./home/dashboard/dashboard.component";
 import {GuestlistAdminComponent} from "./home/dashboard/cards-admin/guestlist-admin/guestlist-admin.component";
 import {GuestDetailComponent} from "./home/dashboard/cards-admin/guestlist-admin/guest-detail/guest-detail.component";
 import {MarkerInfoComponent} from "./home/dashboard/cards-admin/map-admin/marker-info/marker-info.component";
 import {MapAdminComponent} from './home/dashboard/cards-admin/map-admin/map-admin.component';
-import {GuestlistService} from "./home/dashboard/cards-admin/guestlist-admin/guestlist.service";
-import { InfoCardAdminComponent } from './home/dashboard/cards-admin/info-card-admin/info-card-admin.component';
-import { NewWeddingDialogComponent } from './home/new-wedding-dialog/new-wedding-dialog.component';
+import {GuestlistService} from "./services/guestlist.service";
+import {InfoCardAdminComponent} from './home/dashboard/cards-admin/info-card-admin/info-card-admin.component';
+import {NewWeddingDialogComponent} from './home/new-wedding-dialog/new-wedding-dialog.component';
 import {PresentListService} from "./services/present-list.service";
 import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-upload/present-upload.component";
 import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
 import {CallbackComponent} from "./callback.component";
 import {AuthService} from "./auth/auth.service";
+import { MessagesComponent } from './home/dashboard/cards-admin/messages/messages.component';
+import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-flow/chat-flow.component';
+import {InfoCardComponent} from "./home/dashboard/cards-guest/infocard/info-card.component";
+import {RouterModule} from "@angular/router";
+import { InviteGuestComponent } from './home/dashboard/cards-admin/guestlist-admin/invite-guest/invite-guest.component';
 
 
 @NgModule({
@@ -63,6 +70,11 @@ import {AuthService} from "./auth/auth.service";
     NewWeddingDialogComponent,
     PresentListGuestComponent,
     PresentUploadComponent,
+    MessagesComponent,
+    ChatFlowComponent,
+    InfoCardComponent,
+    InviteGuestComponent,
+    PresentUploadComponent,
     CallbackComponent
   ],
   imports: [
@@ -72,6 +84,7 @@ import {AuthService} from "./auth/auth.service";
     MatToolbarModule,
     MatDatepickerModule,
     MatButtonModule,
+    MatChipsModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -91,14 +104,17 @@ import {AuthService} from "./auth/auth.service";
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA'
-      }),
-    AgmDirectionModule
+      apiKey: environment.agm_api,
+      libraries: ["places"]
+    }),
+    AgmDirectionModule,
+    ReactiveFormsModule
   ],
-  entryComponents:[
-    NewWeddingDialogComponent
+  entryComponents: [
+    NewWeddingDialogComponent,
+    InviteGuestComponent
   ],
   providers: [
     GuestlistService,
@@ -110,4 +126,5 @@ import {AuthService} from "./auth/auth.service";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

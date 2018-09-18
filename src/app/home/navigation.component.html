@@ -6,32 +6,43 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Company logo</mat-toolbar>
-    <app-user-card></app-user-card>
-    <h2>My weddings:</h2>
-    <mat-nav-list>
-      <a mat-stroked-button color="primary"
-         *ngFor="let wedding of myWeddings"
-         routerLink="/wedding/{{wedding.name}}">
-        {{ wedding.name }}
-      </a>
-      <button mat-stroked-button color="alert" (click)="openWeddingDialog()">
-        +
-      </button>
 
-    </mat-nav-list>
+    <!--<div class="company-logo">My Wedding</div>-->
+    <app-user-card></app-user-card>
+    <!--</mat-nav-list>-->
+    <h2>My weddings:</h2>
+    <div *ngIf="myWeddings | async; let myWeddings; else loading">
+
+      <mat-nav-list>
+        <div *ngFor="let wedding of myWeddings">
+          <a
+            class="sidenav-button"
+            mat-raised-button
+            routerLink="/wedding/{{wedding}}"
+          >
+            {{ wedding }}
+          </a>
+          <br>
+        </div>
+        <button class="sidenav-button" mat-stroked-button color="alert" (click)="openWeddingDialog()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </mat-nav-list>
+    </div>
+    <ng-template #loading>Loading User Data...</ng-template>
     <h2>Guest weddings:</h2>
-    <mat-nav-list>
-      <div *ngFor="let wedding of guestWeddings">
-        <a mat-stroked-button color="warn"
-           routerLink="/wedding/{{wedding.name}}"
-           (click)="updateDashBoard(wedding)"
-        >
-          {{ wedding.name }}
-        </a>
-        <br>
-      </div>
-    </mat-nav-list>
+    <!--<mat-nav-list>-->
+    <!--<a-->
+    <!--class="sidenav-button"-->
+    <!--mat-stroked-button color="primary"-->
+    <!--*ngFor="let wedding of myWeddings"-->
+    <!--routerLink="/wedding/{{wedding.name}}">-->
+    <!--{{ wedding.name }}-->
+    <!--</a>-->
+
+
+
+
   </mat-sidenav>
   <mat-sidenav-content>
     <button
@@ -41,6 +52,7 @@
       mat-icon-button
       (click)="drawer.toggle(); toggleMenuIcon()"
     >
+
       <mat-icon aria-label="Side nav toggle icon">
         <i class="material-icons" *ngIf="!menuOpen">
           arrow_back_ios
@@ -50,6 +62,11 @@
         </i>
       </mat-icon>
     </button>
-    <app-dashboard></app-dashboard>
+    <!--<mat-toolbar>-->
+    <!--<a (click)="goTo('guest-list')" >Guest list</a>-->
+    <!--<a (click)="goTo('locations')" >Locations</a>-->
+    <!--<a (click)="goTo('present-list')" >Present list</a>-->
+    <!--</mat-toolbar>-->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

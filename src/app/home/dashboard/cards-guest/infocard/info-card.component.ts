@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {InfoCardService} from "./info-card.service";
+import {InfoCardService} from "../../../../services/info-card.service";
 
 @Component({
   selector: 'app-info-card',

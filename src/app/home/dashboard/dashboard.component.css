@@ -4,7 +4,8 @@
 }
 
 mat-card {
-  margin: 24px;
+  margin: 20px;
+  background-color:rgba(255, 255, 255, 0.6);
 }
 
 .mat-grid-tile {
@@ -24,18 +25,6 @@ mat-grid-list {
 #map {
   height: 400px;
 }
-/*.dashboard-card {*/
-  /*position: absolute;*/
-  /*top: 15px;*/
-  /*left: 15px;*/
-  /*right: 15px;*/
-  /*bottom: 15px;*/
-/*}*/
 
-/*.more-button {*/
-  /*position: absolute;*/
-  /*top: 5px;*/
-  /*right: 10px;*/
-/*}*/
 
 

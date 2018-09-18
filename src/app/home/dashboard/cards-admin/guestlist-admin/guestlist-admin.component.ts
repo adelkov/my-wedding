@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subject} from "rxjs/Subject";
-import {Guest} from "./guest.model";
-import {GuestlistService} from "./guestlist.service";
+import {Guest} from "../../../../models/guest.model";
+import {GuestlistService} from "../../../../services/guestlist.service";
 
 
 /**
@@ -14,7 +14,7 @@ import {GuestlistService} from "./guestlist.service";
   templateUrl: 'guestlist-admin.component.html',
 })
 export class GuestlistAdminComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'rsvp', 'guests'];
+  displayedColumns: string[] = [ 'name', 'rsvp', 'guests'];
   dataSource: MatTableDataSource<Guest>;
   guests: Guest[];
   guestChosen = false;
@@ -44,5 +44,9 @@ export class GuestlistAdminComponent implements OnInit {
   onClickRow(row) {
     this.guestService.guestDisplayed = true;
     this.guestService.guestChosen.next(row)
+  }
+
+  openInvitationDialog() {
+
   }
 }
