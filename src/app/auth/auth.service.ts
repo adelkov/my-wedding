@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as auth0 from 'auth0-js';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import {Subject} from "rxjs";
 
 (window as any).global = window;
 
@@ -21,6 +22,7 @@ export class AuthService {
   userProfile: any;
   accessToken: string;
   authenticated: boolean;
+  authReady = new Subject<any>();
 
   constructor(private router: Router) {
     this.getAccessToken();
@@ -40,7 +42,6 @@ export class AuthService {
       } else if (err) {
         console.error(`Error: ${err.error}`);
       }
-      console.log(authResult.accessToken);
       console.log("handle login callback");
       this.router.navigate(['/wedding/test-wedding-id']);
     });
@@ -59,6 +60,7 @@ export class AuthService {
     this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
       if (profile) {
         this._setSession(authResult, profile);
+        this.authReady.next();
       }
     });
   }
@@ -69,6 +71,8 @@ export class AuthService {
     this.accessToken = authResult.accessToken;
     this.userProfile = profile;
     this.authenticated = true;
+    console.log(this.accessToken);
+    console.log(this.userProfile);
   }
 
   logout() {

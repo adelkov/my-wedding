@@ -18,6 +18,7 @@ export class PresentListService {
 
   getPresentList(){
     console.log(this.authService.accessToken);
+    console.log(this.authService.userProfile);
     this.httpClient.get<{message: string, data: Present[] }>(
      'http://localhost:3000/api/presents', {
        headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.accessToken}`)
