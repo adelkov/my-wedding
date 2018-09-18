@@ -24,7 +24,6 @@ export class ChatFlowComponent implements OnInit {
     this.paramsSub = this.route.params.subscribe(
       (params: Params) => {
         this.weddingName = params.weddingName;
-        console.log(this.weddingName);
         this.chatService.joinRoom(this.weddingName);
       }
     );
@@ -34,7 +33,6 @@ export class ChatFlowComponent implements OnInit {
     this.messageSub = this.chatService.messages.subscribe(
       (message) => {
         let messageObj = JSON.parse(message);
-        console.log(this.weddingName === messageObj.wedding);
         if (messageObj.wedding === this.weddingName) {
           this.feedback = "";
           this.messages.push(messageObj);
