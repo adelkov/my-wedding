@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ChatService} from "../../../../../services/chat.service";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-chat-flow',
@@ -10,26 +11,43 @@ import {ChatService} from "../../../../../services/chat.service";
 export class ChatFlowComponent implements OnInit {
   messageSub: Subscription;
   feedbackSub: Subscription;
+  paramsSub: Subscription;
   messages = [];
   myName = "Adél";
   feedback = "";
+  weddingName = "teszt wedding"; // todo
 
   constructor(
-    private chatService: ChatService
+    private chatService: ChatService,
+    private route: ActivatedRoute
   ) {
+    this.paramsSub = this.route.params.subscribe(
+      (params: Params) => {
+        this.weddingName = params.weddingName;
+        console.log(this.weddingName);
+        this.chatService.joinRoom(this.weddingName);
+      }
+    );
   }
 
   ngOnInit() {
     this.messageSub = this.chatService.messages.subscribe(
       (message) => {
-        this.feedback = "";
-        this.messages.push(JSON.parse(message));
+        let messageObj = JSON.parse(message);
+        console.log(this.weddingName === messageObj.wedding);
+        if (messageObj.wedding === this.weddingName) {
+          this.feedback = "";
+          this.messages.push(messageObj);
+        }
       }
     );
 
     this.feedbackSub = this.chatService.feedbacks.subscribe(
       (feedback) => {
-        this.feedback = feedback + " is typing...";
+        let messageObj = JSON.parse(feedback);
+        if (messageObj.wedding === this.weddingName) {
+          this.feedback = messageObj.name + " is typing...";
+        }
       }
     )
   }
@@ -37,12 +55,16 @@ export class ChatFlowComponent implements OnInit {
   sendMessage(event) {
     this.chatService.messages.next({
       message: event.target.value,
-      name: this.myName
+      name: this.myName,
+      wedding: this.weddingName
     });
     event.target.value = "";
   }
 
   sendFeedback() {
-    this.chatService.feedbacks.next(this.myName)
+    this.chatService.feedbacks.next({
+      name: this.myName,
+      wedding: this.weddingName
+    })
   }
 }

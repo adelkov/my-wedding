@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {ChatService} from "../../../../services/chat.service";
 import {GuestlistService} from "../../../../services/guestlist.service";
+import {SocketService} from "../../../../services/socket.service";
 
 @Component({
   selector: 'app-messages',
@@ -10,11 +11,10 @@ import {GuestlistService} from "../../../../services/guestlist.service";
 })
 export class MessagesComponent {
 
-  guests;
+  onlineUsers: Observable<Object[]>;
 
-  constructor(private guestService: GuestlistService) {
-    this.guests = this.guestService.getGuests();
+  constructor(private socketService: SocketService) {
+    this.onlineUsers = this.socketService.onlineUserConnect();
   }
-
 
 }
