@@ -46,6 +46,8 @@ import {NewWeddingDialogComponent} from './home/new-wedding-dialog/new-wedding-d
 import {PresentListService} from "./services/present-list.service";
 import {PresentUploadComponent} from "./home/dashboard/cards-admin/present-upload/present-upload.component";
 import {PresentListGuestComponent} from "./home/dashboard/cards-guest/presentlist-guest/present-list-guest.component";
+import {CallbackComponent} from "./callback.component";
+import {AuthService} from "./auth/auth.service";
 import { MessagesComponent } from './home/dashboard/cards-admin/messages/messages.component';
 import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-flow/chat-flow.component';
 import {InfoCardComponent} from "./home/dashboard/cards-guest/infocard/info-card.component";
@@ -71,7 +73,9 @@ import { InviteGuestComponent } from './home/dashboard/cards-admin/guestlist-adm
     MessagesComponent,
     ChatFlowComponent,
     InfoCardComponent,
-    InviteGuestComponent
+    InviteGuestComponent,
+    PresentUploadComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +121,8 @@ import { InviteGuestComponent } from './home/dashboard/cards-admin/guestlist-adm
     WeddingService,
     GoogleMapsAPIWrapper,
     MatDialog,
-    PresentListService
+    PresentListService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
