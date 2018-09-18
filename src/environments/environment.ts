@@ -3,14 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   auth: {
     clientID: 'lL92lnQl13BmOeme7STGG7xOOUxpv6fg',
     domain: 'my-wedding-test.eu.auth0.com',
     audience: 'http://localhost:3000',
     redirect: 'http://localhost:4200/callback',
-    scope: 'openid profile email'
-  }
+    scope: 'openid profile email',
+    responseType: 'token id_token'
+  },
+  agm_api: "AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA",
+  // HOST: "http://my-wedding-backend.herokuapp.com",
+  HOST: "http://localhost:3000"
 };
 
 /*
