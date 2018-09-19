@@ -1,20 +1,12 @@
 <h2><i class="far fa-comments fa-1x"></i> Messages</h2>
-<div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col col-lg-2">
-      <div class="users-container">
-        <mat-list role="list">
-          <div *ngIf="onlineUsers | async; let onlineUsers; else loading">
-            <mat-list-item role="listitem" *ngFor="let onlineUser of onlineUsers">
-              <i class="fas fa-user-circle"></i> &#160;{{onlineUser.name}}
-            </mat-list-item>
-          </div>
-          <ng-template #loading>Loading User Data...</ng-template>
-        </mat-list>
-      </div>
+
+<div class="users-container">
+  <mat-list role="list">
+    <div *ngIf="onlineUsers | async; let onlineUsers; else loading">
+      <mat-list-item role="listitem" *ngFor="let onlineUser of onlineUsers">
+        <i class="fas fa-user-circle"></i> &#160;{{onlineUser.name}}
+      </mat-list-item>
     </div>
-    <div class="col col-lg-10">
-      <app-chat-flow></app-chat-flow>
-    </div>
-  </div>
+    <ng-template #loading>Loading User Data...</ng-template>
+  </mat-list>
 </div>
