@@ -3,6 +3,8 @@ import * as io from 'socket.io-client';
 import {Observable} from 'rxjs/Observable';
 import * as Rx from 'rxjs/Rx';
 import {environment} from '../../environments/environment';
+import {AuthService} from "../auth/auth.service";
+import {Subscription} from "rxjs";
 
 
 @Injectable({
@@ -10,9 +12,17 @@ import {environment} from '../../environments/environment';
 })
 export class SocketService {
   private socket;
+  authSub: Subscription;
+  myName;
 
-  constructor() {
-    this.socket = io(environment.HOST + "?name=Adel&wedding=teszt");
+  constructor(private authService: AuthService) {
+    this.authSub = this.authService.authReady.subscribe(
+      () => {
+        this.myName = this.authService.userProfile.name;
+        this.socket = io(environment.HOST + "?name=" + this.myName + "&wedding=teszt");
+      }
+    )
+
   }
 
   messagesConnect(): Rx.Subject<MessageEvent> {
