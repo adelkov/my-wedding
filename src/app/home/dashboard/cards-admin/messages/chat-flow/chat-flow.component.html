@@ -1,27 +1,27 @@
-<div id="output-container">
-  <div id="output">
-    <mat-chip-list class="mat-chip-list-stacked">
-      <div *ngFor="let message of messages">
-        <mat-chip *ngIf="message.name !== myName" class="otherMessage">
-          <b>{{message.name+": "}} </b> {{message.message}}
-        </mat-chip>
-        <mat-chip *ngIf="message.name === myName" class="myMessage">
-          <b>{{message.name+": "}} &#160; </b> {{message.message}}
-        </mat-chip>
-      </div>
-      <div>{{ feedback }}</div>
-    </mat-chip-list>
+  <div id="output-container">
+    <div id="output">
+      <mat-chip-list class="mat-chip-list-stacked">
+        <div *ngFor="let message of messages">
+          <mat-chip *ngIf="message.name !== myName" class="otherMessage">
+            <b>{{message.name+": "}} </b> {{message.message}}
+          </mat-chip>
+          <mat-chip *ngIf="message.name === myName" class="myMessage">
+            <b>{{message.name+": "}} &#160; </b> {{message.message}}
+          </mat-chip>
+        </div>
+        <div>{{ feedback }}</div>
+      </mat-chip-list>
+    </div>
   </div>
-</div>
-<form class="message">
-  <mat-form-field class="example-full-width">
-    <input
-      matInput #message maxlength="256"
-      placeholder="Message"
-      (keydown)="sendFeedback()"
-      (keydown.enter)="sendMessage($event)"
-      utocomplete="off">
-    <mat-hint align="start"><strong>Don't disclose personal info</strong></mat-hint>
-    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-  </mat-form-field>
-</form>
+  <form class="message">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput #message maxlength="256"
+        placeholder="Message"
+        (keydown)="sendFeedback()"
+        (keydown.enter)="sendMessage($event)"
+        utocomplete="off">
+      <mat-hint align="start"><strong>Don't disclose personal info</strong></mat-hint>
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+  </form>
