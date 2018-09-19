@@ -5,7 +5,7 @@ import {Subscription} from "rxjs/Subscription";
 import {share} from "rxjs/operators";
 import {Observable} from "rxjs/Observable";
 import {ChatService} from "../../../../services/chat.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {AuthService} from "../../../../auth/auth.service";
 
 @Component({
@@ -21,11 +21,13 @@ export class InfoCardAdminComponent implements OnInit, OnDestroy {
   constructor(
     private weddingService: WeddingService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
+
     this.authSub = this.authService.authReady.subscribe(
       ()=> {
         this.initComponentData();

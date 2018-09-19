@@ -18,10 +18,9 @@ export class MapService {
 
 
   updateMarker(marker: Marker) {
-    console.log(marker);
     this.http.patch(environment.HOST + '/api/markers/' + this.weddingName, marker)
       .subscribe(
-        (response) => {
+        () => {
           this.getMarkers();
         },
         (error) => {
@@ -33,7 +32,7 @@ export class MapService {
   addMarker(marker: Marker) {
     this.http.post(environment.HOST + '/api/markers/' + this.weddingName, marker)
       .subscribe(
-        (response) => {
+        () => {
           this.getMarkers();
         },
         (error) => {
