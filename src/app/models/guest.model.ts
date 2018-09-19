@@ -1,6 +1,6 @@
 export class Guest {
   id: string;
-  email: string;
+  toEmail: string;
   name: string;
   rsvp: string;
   guests: number;
@@ -9,7 +9,7 @@ export class Guest {
 
 
   constructor(email: string, name: string, guests: number) {
-    this.email = email;
+    this.toEmail = email;
     this.name = name;
     this.guests = guests;
     this.online = false;

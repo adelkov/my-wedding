@@ -3,6 +3,7 @@ import {Wedding} from "../../../../../models/wedding.model";
 import {MatDialogRef} from "@angular/material";
 import {Guest} from "../../../../../models/guest.model";
 import {NgForm} from "@angular/forms";
+import {GuestlistService} from "../../../../../services/guestlist.service";
 
 @Component({
   selector: 'app-invite-guest',
@@ -11,7 +12,10 @@ import {NgForm} from "@angular/forms";
 })
 export class InviteGuestComponent implements OnInit {
   @ViewChild('f') invitationForm: NgForm;
-  constructor( public dialogRef: MatDialogRef<InviteGuestComponent>) { }
+  constructor(
+    private guestListService: GuestlistService,
+    public dialogRef: MatDialogRef<InviteGuestComponent>
+  ) { }
 
   ngOnInit() {
   }
@@ -24,10 +28,7 @@ export class InviteGuestComponent implements OnInit {
     );
 
     this.dialogRef.close();
-
-    // Todo: invite guest
-    // Todo: save guest to db
-    // Todo: update guestlist
+    this.guestListService.inviteGuest(guest)
   }
 
 }
