@@ -15,10 +15,10 @@ export class GuestlistService {
     private http: HttpClient
   ) {
     this.guests = [
-     new Guest("e@mail.hu", "Juli", 2),
-     new Guest("e@fsd.hu", "Béla", 1),
-     new Guest("fdasf@mail.hu", "Géza", 0),
-     new Guest("e@fdsfsdf.hu", "Rozi", 2)
+      new Guest("e@mail.hu", "Juli", 2),
+      new Guest("e@fsd.hu", "Béla", 1),
+      new Guest("fdasf@mail.hu", "Géza", 0),
+      new Guest("e@fdsfsdf.hu", "Rozi", 2)
     ]
   }
 
@@ -32,15 +32,15 @@ export class GuestlistService {
 
   getGuests() {
     this.guests.forEach(function (guest: Guest) {
-      guest.imgURL = 'https://robohash.org/' + guest.name;
+      guest.imgURL = 'https://robohash.org/' + guest.toName;
     });
     return this.guests.slice();
   }
 
   inviteGuest(guest: Guest) {
-    this.http.post(environment.HOST+"/api/invite/"+this.weddingName, guest)
+    this.http.post(environment.HOST + "/api/invite/" + this.weddingName, guest)
       .subscribe(
-        (resp)=> {
+        (resp) => {
           // todo: update guestlist
         }
       )
