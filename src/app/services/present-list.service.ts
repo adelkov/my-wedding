@@ -4,6 +4,7 @@ import {Subject} from "rxjs/Subject";
 import {Present} from "../models/present.model";
 import {AuthService} from "../auth/auth.service";
 import {map} from "rxjs/operators";
+import {environment} from "../../environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class PresentListService {
@@ -18,10 +19,18 @@ export class PresentListService {
   }
 
   getPresentList(){
+
+    /*const headerDict = {
+      'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`,
+      'SuperSecretUserAuthenticationHeader': `${this.authService.idToken}`
+    };
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict)
+    };*/
+
     this.httpClient.get<{message: string, presents: any }>(
-     'http://localhost:3000/api/presents', {
-       headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.accessToken}`)
-      })
+     environment.HOST + '/api/presents')
       .pipe(map((responseData) => {
         return responseData.presents.map(present => {
           return {
@@ -42,7 +51,7 @@ export class PresentListService {
   presentSelected(presentId: number){
     this.presentList.find(x => x.id === presentId).isTaken = true;
     this.httpClient
-      .patch('http://localhost:3000/api/presents/' + presentId, "isTaken")
+      .patch(environment.HOST + '/api/presents/' + presentId, "isTaken")
       .subscribe(responseData => {
         console.log(responseData);
       });
@@ -52,9 +61,8 @@ export class PresentListService {
     const present: Present = {id: null, name: presentName, link: presentLink, isTaken: false, owner: null};
     this.httpClient
       .post<{ message: string, presentId: number }>
-      ('http://localhost:3000/api/presents', present)
+      (environment.HOST + '/api/presents', present)
       .subscribe(responseData => {
-        console.log(responseData.message);
         present.id = responseData.presentId;
         this.presentList.push(present);
         this.presentsUpdated.next([...this.presentList]);
