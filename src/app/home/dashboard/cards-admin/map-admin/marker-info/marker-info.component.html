@@ -9,7 +9,8 @@
 </div>
 <div *ngIf="!formOpen">
   <h2><i class="{{marker.icon+' fa-1x'}}"></i> {{ marker.name }}</h2>
-  <a mat-mini-fab color="warn"  (click)="deleteThisMarker()">
-    <i class="far fa-trash-alt"></i></a>
+  <a mat-raised-button color="warn"  (click)="deleteThisMarker()">
+    <i class="far fa-trash-alt"></i>
+  </a>
 </div>
 

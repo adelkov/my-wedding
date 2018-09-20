@@ -8,6 +8,7 @@ import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
+import {AuthService} from "../../../../auth/auth.service";
 
 @Component({
   selector: 'app-map-admin',
@@ -21,6 +22,7 @@ export class MapAdminComponent implements OnInit {
   zoom: number = 8;
   public searchControl: FormControl;
   paramSub: Subscription;
+  authSub: Subscription;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -29,19 +31,25 @@ export class MapAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private mapService: MapService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private authService: AuthService
   ) {
     this.markers = this.mapService.markerUpdate.asObservable();
   }
 
   ngOnInit() {
 
-    this.paramSub = this.route.params.subscribe(
-      (params: Params) => {
-        this.mapService.weddingName = params.weddingName;
-        this.mapService.getMarkers();
+    this.authSub = this.authService.authReady.subscribe(
+      () => {
+        this.paramSub = this.route.params.subscribe(
+          (params: Params) => {
+            this.mapService.weddingName = params.weddingName;
+            this.mapService.getMarkers();
+          }
+        );
       }
     );
+
 
     // this.mapService.getMarkers();
     this.searchControl = new FormControl();

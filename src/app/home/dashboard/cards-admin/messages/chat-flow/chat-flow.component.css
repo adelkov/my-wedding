@@ -2,7 +2,7 @@
 
 #output-container {
   position: relative;
-  min-height: 150px;
+  min-height: 200px;
   overflow: scroll;
   width: 100%;
   border: 1px solid gainsboro;
@@ -20,4 +20,9 @@
 
 mat-form-field {
   width: 100%;
+}
+
+
+.myMessage {
+  background-color: #cae3e8;
 }

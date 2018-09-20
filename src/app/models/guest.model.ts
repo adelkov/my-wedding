@@ -1,7 +1,7 @@
 export class Guest {
   id: string;
-  email: string;
-  name: string;
+  toEmail: string;
+  toName: string;
   rsvp: string;
   guests: number;
   imgURL: string;
@@ -9,8 +9,8 @@ export class Guest {
 
 
   constructor(email: string, name: string, guests: number) {
-    this.email = email;
-    this.name = name;
+    this.toEmail = email;
+    this.toName = name;
     this.guests = guests;
     this.online = false;
     this.rsvp = "pending";

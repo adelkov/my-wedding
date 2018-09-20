@@ -1,33 +1,34 @@
 <div class="grid-container">
 
-  <mat-card>
+  <mat-card id="info-card">
     <app-info-card-admin></app-info-card-admin>
   </mat-card>
+
   <mat-card id="guest-list">
-    <div class="container">
-      <div class="row justify-content-md-center">
-        <div class="col col-lg-6">
-          <app-guestlist-admin></app-guestlist-admin>
-        </div>
-        <div class="col col-lg-6">
-          <app-guest-detail></app-guest-detail>
-        </div>
-      </div>
-    </div>
+    <app-guestlist-admin></app-guestlist-admin>
   </mat-card>
-  <mat-card>
+
+  <div id="guest-detail">
+    <app-guest-detail></app-guest-detail>
+  </div>
+
+  <mat-card id="online-users">
     <app-messages></app-messages>
   </mat-card>
+
+  <mat-card id="chat-flow">
+    <app-chat-flow></app-chat-flow>
+  </mat-card>
+
   <mat-card id="locations">
     <app-map-admin></app-map-admin>
   </mat-card>
 
-  <mat-card>
-  </mat-card>
   <mat-card id="present-list">
     <app-present-guest></app-present-guest>
   </mat-card>
-  <mat-card>
-    <app-present-upload></app-present-upload>
-  </mat-card>
+
+  <!--<mat-card id="present-upload">-->
+    <!--<app-present-upload></app-present-upload>-->
+  <!--</mat-card>-->
 </div>

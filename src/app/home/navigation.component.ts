@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {map, share} from 'rxjs/operators';
-import {Subscription} from "rxjs/Subscription";
 import {WeddingService} from "../services/wedding.service";
 import {MatDialog} from "@angular/material";
 import {NewWeddingDialogComponent} from "./new-wedding-dialog/new-wedding-dialog.component";

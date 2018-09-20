@@ -10,6 +10,7 @@ export class ChatService {
   feedbacks: Subject<any>;
 
   constructor(private wsService: SocketService) {
+
     this.messages = <Subject<any>>wsService
       .messagesConnect()
       .map((response: any): any => {
@@ -25,4 +26,7 @@ export class ChatService {
       )
   }
 
+  joinRoom(weddingName: string) {
+    this.wsService.joinRoom(weddingName)
+  }
 }

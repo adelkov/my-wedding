@@ -13,8 +13,8 @@ export const environment = {
     responseType: 'token id_token'
   },
   agm_api: "AIzaSyC_YLBHJrEc36MdARSyS_qpqWHp8OBkyhA",
-  // HOST: "http://my-wedding-backend.herokuapp.com",
-  HOST: "http://localhost:3000"
+  HOST: "http://my-wedding-backend.herokuapp.com",
+  // HOST: "http://localhost:3000"
 };
 
 /*
