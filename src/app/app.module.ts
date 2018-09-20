@@ -29,7 +29,7 @@ import {
   MatButtonToggleModule, MatDialog, MatDialogModule, MatNativeDateModule,
 } from '@angular/material';
 import {AppRoutingModule} from "./app-routing.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {WeddingService} from "./services/wedding.service";
 import {UserCardComponent} from './home/user-card/user-card.component';
 
@@ -53,6 +53,7 @@ import { ChatFlowComponent } from './home/dashboard/cards-admin/messages/chat-fl
 import {InfoCardComponent} from "./home/dashboard/cards-guest/infocard/info-card.component";
 import {RouterModule} from "@angular/router";
 import { InviteGuestComponent } from './home/dashboard/cards-admin/guestlist-admin/invite-guest/invite-guest.component';
+import {TokenInterceptor} from "./auth/token.interceptor";
 
 
 @NgModule({
@@ -122,7 +123,12 @@ import { InviteGuestComponent } from './home/dashboard/cards-admin/guestlist-adm
     GoogleMapsAPIWrapper,
     MatDialog,
     PresentListService,
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

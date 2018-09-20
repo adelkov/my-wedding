@@ -19,7 +19,7 @@ export class PresentListGuestComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('accessToken')) {
+    if (sessionStorage.getItem('accessToken') != null) {
       this.presentListService.getPresentList();
     } else {
       this.authService.authReady.subscribe((next) => {

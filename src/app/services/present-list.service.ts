@@ -20,17 +20,17 @@ export class PresentListService {
 
   getPresentList(){
 
-    const headerDict = {
+    /*const headerDict = {
       'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`,
       'SuperSecretUserAuthenticationHeader': `${this.authService.idToken}`
     };
 
     const requestOptions = {
       headers: new HttpHeaders(headerDict)
-    };
+    };*/
 
     this.httpClient.get<{message: string, presents: any }>(
-     environment.HOST + '/api/presents', requestOptions)
+     environment.HOST + '/api/presents')
       .pipe(map((responseData) => {
         return responseData.presents.map(present => {
           return {

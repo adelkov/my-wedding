@@ -74,6 +74,7 @@ export class AuthService {
 
     this.idToken = authResult.idToken;
     sessionStorage.setItem('accessToken', this.accessToken);
+    sessionStorage.setItem('idToken', this.idToken);
   }
 
   logout() {
