@@ -9,18 +9,23 @@ import {AuthService} from "../../../../auth/auth.service";
   templateUrl: './present-list-guest.component.html',
   styleUrls: ['./present-list-guest.component.css']
 })
-export class PresentListGuestComponent implements OnInit, OnDestroy{
+export class PresentListGuestComponent implements OnInit, OnDestroy {
   presentList: Present[] = [];
   private presentListSub: Subscription;
 
   constructor(
     public presentListService: PresentListService,
-    private authService: AuthService) {}
+    private authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    this.authService.authReady.subscribe((next) => {
+    if (sessionStorage.getItem('accessToken')) {
       this.presentListService.getPresentList();
-    });
+    } else {
+      this.authService.authReady.subscribe((next) => {
+        this.presentListService.getPresentList();
+      });
+    }
     this.presentListSub = this.presentListService.getPresentListUpdateListener()
       .subscribe((presents: Present[]) => {
         this.presentList = presents;
@@ -31,7 +36,7 @@ export class PresentListGuestComponent implements OnInit, OnDestroy{
     this.presentListSub.unsubscribe();
   }
 
-  onSelection(event, item){
+  onSelection(event, item) {
     this.presentListService.presentSelected(event.option.value.id);
   }
 

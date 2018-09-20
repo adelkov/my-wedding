@@ -12,7 +12,7 @@ export class AuthService {
   auth0 = new auth0.WebAuth({
     clientID: environment.auth.clientID,
     domain: environment.auth.domain,
-    responseType: 'token',
+    responseType: environment.auth.responseType,
     redirectUri: environment.auth.redirect,
     audience: environment.auth.audience,
     scope: environment.auth.scope
@@ -21,6 +21,7 @@ export class AuthService {
   expiresAt: number;
   userProfile: any;
   accessToken: string;
+  idToken: string;
   authenticated: boolean;
   authReady = new Subject<any>();
 
@@ -42,7 +43,6 @@ export class AuthService {
       } else if (err) {
         console.error(`Error: ${err.error}`);
       }
-      console.log("handle login callback");
       this.router.navigate(['/wedding/test-wedding-id']);
     });
   }
@@ -71,8 +71,9 @@ export class AuthService {
     this.accessToken = authResult.accessToken;
     this.userProfile = profile;
     this.authenticated = true;
-    console.log(this.accessToken);
-    console.log(this.userProfile);
+
+    this.idToken = authResult.idToken;
+    sessionStorage.setItem('accessToken', this.accessToken);
   }
 
   logout() {
