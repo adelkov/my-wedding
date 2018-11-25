@@ -17,8 +17,7 @@ export class WeddingService implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-
-  ) {
+    ) {
 
   }
 
@@ -45,13 +44,23 @@ export class WeddingService implements OnInit {
       )
   }
 
-  getUser() {
-    /** GET User object from server */
+/*  getUser() {
+    /!** GET User object from server *!/
     this.http.get<string[]>(
       environment.HOST + '/api/users/' + this.userid)
       .subscribe((response) => {
           this.userUpdate.next(response["user"]["myWeddings"])
         }
       )
+  }*/
+
+  getUser() {
+    this.http.get<String[]>(
+      environment.HOST + '/api/weddings')
+      .subscribe((response) => {
+        this.userUpdate.next(response)
+      }
+    )
   }
+
 }
